@@ -125,7 +125,7 @@ path는 MobaXterm을 기준으로 하였음
     - [ ] dataset_randoim_div
     - [ ] txt_revised
     - [ ] txt_to_timetable.py
-    - [x] 3. Foldering
+- [x] 3. Foldering
 
 ### Next Step
 
