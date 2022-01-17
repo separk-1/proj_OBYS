@@ -45,8 +45,6 @@ OBYS pjt 코드 정리
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
@@ -74,7 +72,41 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### 1. Frame Extraction - video to frame & frame to video
+```sh
+   from DataPreprocessing import FrameExtraction
+   
+   ext_vidpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/spot.mp4"
+   save_imgpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/resized_spot/"
+   ext_imgpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/resized_frog/"
+   save_vidpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/new_frog.mp4"
+   FrameExtraction_1 = FrameExtraction(ext_vidpath, save_imgpath, ext_imgpath, save_vidpath)
+   FrameExtraction_1.video_to_frame()
+   FrameExtraction_1.video_to_frame()
+   ```
+   
+### 2. File Filter
+```sh
+   from DataPreprocessing import FormatRevision
+   import os
+   
+   label_list = os.listdir("**dir")
+   image_list = os.listdir("**dir")
+   FormatRevision_1 = FormatRevision(label_list, image_list)
+   FormatRevision_1.file_filter()
+   ```
+
+### 3. Foldering
+```sh
+   from DataPreprocessing import Foldering
+   
+   my_dir = "/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/"
+   case_name = "case_1"
+   train_dir = ["cycle_1", "cycle_2", "cycle_4"]
+   val_dir = ["cycle_3", "cycle_5"]
+   Foldering_1 = Foldering(my_dir, case_name, train_dir, val_dir)
+   Foldering_1.foldering()
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
