@@ -31,7 +31,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-OBYS pjt 코드 정리
+* Obayashi project code
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -68,7 +68,7 @@ OBYS pjt 코드 정리
 ## Usage
 
 ### 1. Frame Extraction - video to frame & frame to video
-path는 MobaXterm을 기준으로 하였음
+* MobaXterm path
 ```sh
    from DataPreprocessing import FrameExtraction
    
