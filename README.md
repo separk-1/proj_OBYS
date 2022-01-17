@@ -55,9 +55,9 @@
    ```sh
    git clone https://github.com/separk-1/proj_OBSYS.git
    ```
-3. Install NPM packages
+3. Install packages
    ```sh
-   npm install
+   pip install -r requirements.txt  
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
