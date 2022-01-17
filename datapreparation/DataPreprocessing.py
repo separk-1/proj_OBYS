@@ -2,12 +2,15 @@ import cv2
 import numpy as np
 import glob
 import os
+import re
 import pandas as pd
+import math
 import natsort
 
 import distutils.errors
 import os.path
 from distutils.dir_util import copy_tree
+#import yaml
 
 
 class FrameExtraction:
@@ -19,23 +22,29 @@ class FrameExtraction:
 
     def video_to_frame(self):
         vidcap = cv2.VideoCapture(self.ext_vidpath)
+        fps = vidcap.get(cv2.CAP_PROP_FPS)
+        fps_int = round(fps)
+        print("fps: %s" % (fps))
         count = 0
         while (vidcap.isOpened()):
+            fps = vidcap.get(cv2.CAP_PROP_FPS)
             count_zero = str(count).zfill(5)
             ret, image = vidcap.read()
             # 이미지 사이즈 960x540으로 변경
             # image = cv2.resize(image, (960, 540))
-
-            # 30프레임당 하나씩 이미지 추출
-            if (int(vidcap.get(1)) % 30 == 0):
-                print('Saved frame number : ' + str(int(vidcap.get(1))))
-                # 추출된 이미지가 저장되는 경로
-                cv2.imwrite(self.save_imgpath+"/%s.png" % count_zero, image)
-                # print('Saved frame%s.png' % count)
-                count += 1
+            if count == math.floor(vidcap.get(cv2.CAP_PROP_FRAME_COUNT)/fps_int):
+                break
             else:
-              pass
-        
+                if (int(vidcap.get(1)) % fps_int == 0):
+                    print('Saved frame number : ' + str(int(vidcap.get(1))))
+                    # 추출된 이미지가 저장되는 경로
+                    cv2.imwrite(self.save_imgpath + "/%s.png" % count_zero, image)
+                    # print('Saved frame%s.png' % count)
+                    count += 1
+                else:
+                    pass
+
+
         vidcap.release()
         return
 
@@ -47,7 +56,7 @@ class FrameExtraction:
         img_array = []
         size = (0, 0)
         # for filename in glob.glob('/home/obayashi/data/first_video/test/cut_frame/*.png'):
-        
+
         for filename in file_list_py:
             img = cv2.imread(self.ext_imgpath + filename)
             height, width, layers = img.shape
@@ -82,6 +91,21 @@ class FormatRevision:
             print(sub_file + " is removed")
         return
 
+    @classmethod
+    def txt_revised(cls, file_list):
+        file_list = natsort.natsorted(file_list)
+        for file in file_list:
+            open_file = open(file, 'r')
+            read_file = open_file.read()
+            regex = re.compile(',')
+            read_file = regex.sub('   ', read_file)
+
+            write_file = open(file, 'w')
+            write_file.write(read_file)
+
+            print(file + " is revised")
+        return
+
 class Foldering:
     def __init__(self, my_dir, case_name, train_dir, val_dir):
         self.my_dir = my_dir
@@ -90,26 +114,37 @@ class Foldering:
         self.val_dir = val_dir
 
     def foldering(self):
-        dst_train = self.my_dir+"Case/%s/train" % (self.case_name)
-        dst_val = self.my_dir+"Case/%s/val" % (self.case_name)
+        dst_train = self.my_dir + "Case/%s/train" % (self.case_name)
+        dst_val = self.my_dir + "Case/%s/val" % (self.case_name)
 
-        if os.path.exists(self.my_dir+"Case/" + self.case_name):
+        if os.path.exists(self.my_dir + "Case/" + self.case_name):
             print("%s 폴더가 이미 존재합니다. case_name을 변경하거나 기존 폴더(%s)를 삭제해 주세요." % (self.case_name, self.case_name))
 
         else:
             for i in range(len(self.train_dir)):
                 try:
-                    copy_tree(self.my_dir+"Dataset/%s/img/" % (self.train_dir[i]), dst_train + "/img/")
-                    copy_tree(self.my_dir+"Dataset/%s/txt/" % (self.train_dir[i]), dst_train + "/txt/")
+                    copy_tree(self.my_dir + "Dataset/%s/img/" % (self.train_dir[i]), dst_train + "/img/")
+                    copy_tree(self.my_dir + "Dataset/%s/txt/" % (self.train_dir[i]), dst_train + "/txt/")
                 except distutils.errors.DistutilsError:
                     print("%s의 input train list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.train_dir[i]))
 
             for j in range(len(self.val_dir)):
                 try:
-                    copy_tree(self.my_dir+"Dataset/%s/img/" % (self.val_dir[j]), dst_val + "/img/")
-                    copy_tree(self.my_dir+"Dataset/%s/txt/" % (self.val_dir[j]), dst_val + "/txt/")
+                    copy_tree(self.my_dir + "Dataset/%s/img/" % (self.val_dir[j]), dst_val + "/img/")
+                    copy_tree(self.my_dir + "Dataset/%s/txt/" % (self.val_dir[j]), dst_val + "/txt/")
                 except distutils.errors.DistutilsError:
                     print("%s의 input val list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.val_dir[i]))
+
+            data = {
+                'train': "%sCase/%s/train" % (self.my_dir, self.case_name),
+                'val': "%sCase/%s/train" % (self.my_dir, self.case_name),
+                'nc': 11,
+                'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\","
+                         "\"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
+            }
+            file = open("%sCase/%s/%s.yaml" % (self.my_dir, self.case_name, self.case_name), "w")
+            yaml.dump(data, file)
+            file.close()
 
             print("%s 업로드 완료" % (self.case_name))
         return
