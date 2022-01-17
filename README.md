@@ -78,7 +78,7 @@
    FormatRevision_1.file_filter()
    ```
 * txt_revised
-   ```sh
+```sh
    import os
    import re
    import natsort
