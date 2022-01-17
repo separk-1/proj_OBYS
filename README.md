@@ -53,10 +53,10 @@
 ```sh
    from DataPreprocessing import FrameExtraction
    
-   ext_vidpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/spot.mp4"
-   save_imgpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/resized_spot/"
-   ext_imgpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/resized_frog/"
-   save_vidpath="/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/new_frog.mp4"
+   ext_vidpath="[추출하고자 하는 video path]"
+   save_imgpath="[추출한 이미지를 저장하는 image path]"
+   ext_imgpath="[변환하고자 하는 image path]"
+   save_vidpath="[변환한 이미지를 저장하는 video path]"
    
    FrameExtraction_1 = FrameExtraction(ext_vidpath, save_imgpath, ext_imgpath, save_vidpath)
    
@@ -69,8 +69,8 @@
    from DataPreprocessing import FormatRevision
    import os
    
-   label_list = os.listdir("**dir")
-   image_list = os.listdir("**dir")
+   label_list = os.listdir("[file path]")
+   image_list = os.listdir("[file path]")
    
    FormatRevision_1 = FormatRevision(label_list, image_list)
    
@@ -81,7 +81,7 @@
 ```sh
    from DataPreprocessing import Foldering
    
-   my_dir = "/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/"
+   my_dir = "[dataset folder]"
    case_name = "case_1"
    train_dir = ["cycle_1", "cycle_2", "cycle_4"]
    val_dir = ["cycle_3", "cycle_5"]
