@@ -110,6 +110,6 @@
 
 ### Next Step
 
-![Createplan](./image/Architecture.png)
+![Createplan](./image/rchitecture.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
