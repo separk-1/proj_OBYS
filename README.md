@@ -48,11 +48,6 @@ OBYS pjt 코드 정리
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
@@ -121,7 +116,19 @@ path는 MobaXterm을 기준으로 하였음
 
 <!-- ROADMAP -->
 ## Roadmap
+- [] Data Preprocessing
+    - [x] 1. Frame Extraction 
+          - [x] video_to_frame.py
+          - [x] frame_to_video.py
+    - [] 2. FormatRivision (Utils)
+          - [x] file_filter.py
+          - [] dataset_randoim_div
+          - [] txt_revised
+          - [] txt_to_timetable.py
+    - [x] 3. Foldering
 
+- [] Next Step
+- 
 ![Createplan](./image/Architecture.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
