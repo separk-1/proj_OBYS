@@ -102,10 +102,10 @@
     - [x] video_to_frame.py
     - [x] frame_to_video.py
 - [ ] 2. FormatRivision (Utils)
-    - [x] file_filter.py
-    - [ ] dataset_randoim_div
-    - [ ] txt_revised
-    - [ ] txt_to_timetable.py
+    - [x] file_filter.py #라벨 안 된 이미지 파일 삭제
+    - [ ] dataset_randoim_div #data를 train, val set으로 분리
+    - [ ] txt_revised #labeling 결과 txt format 변환 (,)->( )
+    - [ ] txt_to_timetable.py 
 - [x] 3. Foldering
 
 ### Next Step
