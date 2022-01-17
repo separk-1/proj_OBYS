@@ -73,6 +73,7 @@ This is an example of how to list things you need to use the software and how to
 ## Usage
 
 ### 1. Frame Extraction - video to frame & frame to video
+path는 Mobaterm을 기준으로 하였음
 ```sh
    from DataPreprocessing import FrameExtraction
    
