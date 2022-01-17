@@ -48,8 +48,8 @@
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### 1. Frame Extraction - video to frame & frame to video
-* MobaXterm path
+### 1. Frame Extraction
+* video to frame & frame to video
 ```sh
    from DataPreprocessing import FrameExtraction
    
@@ -64,7 +64,8 @@
    FrameExtraction_1.video_to_frame()
    ```
    
-### 2. File Filter
+### 2. Format Revision
+* file filter
 ```sh
    from DataPreprocessing import FormatRevision
    import os
@@ -76,6 +77,15 @@
    
    FormatRevision_1.file_filter()
    ```
+* txt_revised
+```sh
+   import os
+   import re
+   import natsort
+   
+   FormatRevision.txt_revised("[file path]")
+   ```
+
 
 ### 3. Foldering
 ```sh
