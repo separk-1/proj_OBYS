@@ -76,6 +76,15 @@
    
    FormatRevision_1.file_filter()
    ```
+   
+   ```sh
+   import os
+   import re
+   import natsort
+   
+   FormatRevision.txt_revised("[file path]")
+   ```
+
 
 ### 3. Foldering
 ```sh
