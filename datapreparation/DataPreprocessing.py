@@ -1,16 +1,20 @@
 import cv2
-import numpy as np
-import glob
-import os
 import re
-import pandas as pd
 import math
 import natsort
 
 import distutils.errors
 import os.path
 from distutils.dir_util import copy_tree
-#import yaml
+import yaml
+
+import glob
+import pandas as pd
+import collections
+from random import *
+import shutil
+import matplotlib.pyplot as plt
+import os
 
 
 class FrameExtraction:
@@ -148,3 +152,137 @@ class Foldering:
 
             print("%s 업로드 완료" % (self.case_name))
         return
+
+class Foldering_Random:
+    def __init__(self, case_name, threshold, txt_path):
+        self.case_name = case_name
+        self.threshold = threshold
+        self.txt_path = txt_path
+
+        self.filepath = "./Case/%s/train/labels/*.txt"%(case_name)
+        self.file_list = glob.glob(self.filepath)
+
+        Foldering_Random.make_merge_txt(self)
+        self.df = Foldering_Random.origin_df(self)
+
+    # create dataframe
+    def origin_df(self):
+        Foldering_Random.make_merge_txt(self)
+        filename_list = list()
+        labelcount_list = list()
+        for filename in sorted(self.file_list):
+            with open(filename) as file:
+                filename_list.append(filename)
+                labelcount_list.append(len(file.readlines()))
+
+        counted_filename_list = list()
+        for i in range(len(labelcount_list)):
+            for j in range(labelcount_list[i]):
+                counted_filename_list.append(filename_list[i])
+
+        colnames = ['label', 'x_center', 'y_center', 'width', 'height']
+        data = pd.read_csv(self.txt_path, sep="   ", engine='python', encoding="cp949", names=colnames)
+        data["filename"] = counted_filename_list
+
+        label_count = list()
+        for filename in data["filename"]:
+            label_count.append(len(Foldering_Random.label_dict(filename)))
+        data["labelcount"] = label_count
+        return data
+
+    # case folder, threshold를 받아 새로운 folder생성
+    def Random_df(self):
+        global dict
+
+        new_case_name = self.case_name + "_" + str(self.threshold)
+
+        cls_list = list(range(11))
+        zero_list = [0 for i in range(11)]
+        dict_count = dict(zip(cls_list, zero_list))
+
+        other_list = list()
+        df_Random = pd.DataFrame()
+        for cls in range(0, 11):
+            if dict_count[cls] >= self.threshold:
+                pass
+
+            else:
+                con = (self.df.label == cls)
+                if len(self.df[con]) >= self.threshold:  # threshold보다 많은 개수가 있으면
+                    df_0 = self.df[con].sample(self.threshold)  # threshold만큼만 고름
+                    for k in range(self.threshold):
+                        other_list.append(cls)  # 고른 개수만큼 other_list에 append
+                else:  # threshold보다 적은 개수가 있으면
+                    df_0 = self.df[con].sample(len(self.df[con]))  # 실제 개수만큼만 고름
+                    for k in range(len(self.df[con])):
+                        other_list.append(cls)  # 고른 개수만큼 other_list에 append
+
+                labelcount_list = list()
+                for i in df_0.index:  # 고른것이 df_0
+                    labelcount_list.append(
+                        len(self.df[self.df.filename == self.df.at[i, "filename"]]))  # 고른 df의 index마다 filename이 일치하는 개수 append)
+                df_0["labelcount"] = labelcount_list
+                df_Random = df_Random.append(df_0)
+
+                con2 = (df_0.labelcount > 1)
+                df_0_2 = df_0[con2]  # 2개이상이 겹치는 경우, 다른 class에도 append해줘야함
+
+                for i in df_0_2.index:
+                    filename = df_0_2.at[i, "filename"]
+                    con3 = (self.df.filename == filename) & (self.df.label != cls)  ##다른 클래스의 겹치는 label
+
+                    df_other = self.df[con3]  # 여기서 cls > threshold인 애들 제외하고 append
+                    for j in df_other.index:
+                        cls_0 = df_other.at[j, "label"]  # 겹치는 data의 class
+                        if dict_count[cls_0] >= self.threshold:  ####################threshold만큼 append하기로 수정
+                            pass
+                        else:
+                            if len(df_other[con]) == 0:
+                                pass
+                            elif random() < (self.threshold - dict_count[cls_0]) / len(
+                                    df_other[con]):  # cls에 남은자리 / df_other중 남은자리
+                                other_list.append(df_other.at[j, "label"])
+                                df_Random = df_Random.append(df_other.loc[[j]])
+
+            dict_count = collections.Counter(other_list)
+
+        filename_list = list(set(list(df_Random["filename"])))
+        os.mkdir("./%s/" % (new_case_name))
+        for i in range(len(filename_list)):
+            src = filename_list[i]
+            dst = "./%s/"%(new_case_name)
+            shutil.copy(src, dst)
+
+        return df_Random
+
+    # save histogram by dataframe
+    def save_plot(self, df, figpath):
+        label_list = list(range(11))
+        count_list = list()
+        for i in label_list:
+            count_list.append(list(df['label']).count(i))
+        plot_df = pd.DataFrame({'label': label_list, 'count': count_list})
+        plot_df.plot.bar(x='label', y='count', rot=0)
+        plt.axhline(y=self.threshold, color='r', linewidth=1)
+        plt.savefig(figpath)
+        return
+
+    # create merge txt
+    def make_merge_txt(self):
+        with open(self.txt_path, 'w') as outfile:
+            for filename in sorted(self.file_list):
+                with open(filename) as file:
+                    outfile.write(file.read())
+        return
+
+    # filename에 해당하는 label list
+    @classmethod
+    def label_dict(cls, filename):
+        f = open(filename, 'r')
+        label_list = list()
+        while True:
+            line = f.readline()
+            if not line: break
+            label_list.append(line.split("   ")[0])
+        f.close()
+        return label_list
