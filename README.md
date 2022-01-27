@@ -103,6 +103,27 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### 4. Activity Classification
+   * We use LSTM networks here for classifying (&predicting) classes of activities. 
+   It could be divided into "Train" part, and "Test" part. 
+   Each you can check in python files belows:
+   Train >lstm_obayashi.py 
+   Test > lstm_obayashi_test.py
+   
+   While training (run lstm_obayashi.py file), "*.h5" files are being made.
+   Testing(Predicting) could be done by importing "*.h5" files, maded while training. 
+   
+   You could train with your custom data by changing the path : code below.
+```sh
+   DATASET_PATH = "*.csv"
+   x_train_path = DATASET_PATH + "X_train.csv"
+   x_test_path = DATASET_PATH + "X_test.csv"
+   y_train_path = DATASET_PATH + "y_train.csv"
+   y_test_path = DATASET_PATH + "y_test.csv"
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 <!-- ROADMAP -->
