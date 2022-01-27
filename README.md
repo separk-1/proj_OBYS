@@ -87,7 +87,7 @@
    ```
 
 
-### 3. Foldering
+### 3.1 Foldering
 ```sh
    from DataPreprocessing import Foldering
    
@@ -101,6 +101,20 @@
    Foldering_1.foldering()
    ```
 
+### 3.2 Foldering_Random
+```sh
+   from DataPreprocessing import Foldering_Random
+  
+   Foldering_Random_1 = Foldering_Random(case_name= "[Case_name]",
+                                      threshold = "[Threshold]",
+                                      txt_path='"[Anyfilename]".txt')
+  origin_df = Foldering_Random_1.origin_df()
+  Foldering_Random_1.save_plot(df = origin_df, figpath='"[Original_Plot_name]".png')
+  
+  Random_df = Foldering_Random_1.Random_df()
+  Foldering_Random_1.save_plot(df = Random_df, figpath='"[Random_Plot_name]".png')
+   ```
+   
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### 4. Activity Classification
