@@ -208,39 +208,39 @@ class Foldering_Random:
 
             else:
                 con = (self.df.label == cls)
-                if len(self.df[con]) >= self.threshold:  # threshold보다 많은 개수가 있으면
-                    df_0 = self.df[con].sample(self.threshold)  # threshold만큼만 고름
+                if len(self.df[con]) >= self.threshold:
+                    df_0 = self.df[con].sample(self.threshold)
                     for k in range(self.threshold):
-                        other_list.append(cls)  # 고른 개수만큼 other_list에 append
-                else:  # threshold보다 적은 개수가 있으면
-                    df_0 = self.df[con].sample(len(self.df[con]))  # 실제 개수만큼만 고름
+                        other_list.append(cls)
+                else:
+                    df_0 = self.df[con].sample(len(self.df[con]))
                     for k in range(len(self.df[con])):
-                        other_list.append(cls)  # 고른 개수만큼 other_list에 append
+                        other_list.append(cls)
 
                 labelcount_list = list()
-                for i in df_0.index:  # 고른것이 df_0
+                for i in df_0.index:
                     labelcount_list.append(
-                        len(self.df[self.df.filename == self.df.at[i, "filename"]]))  # 고른 df의 index마다 filename이 일치하는 개수 append)
+                        len(self.df[self.df.filename == self.df.at[i, "filename"]]))
                 df_0["labelcount"] = labelcount_list
                 df_Random = df_Random.append(df_0)
 
                 con2 = (df_0.labelcount > 1)
-                df_0_2 = df_0[con2]  # 2개이상이 겹치는 경우, 다른 class에도 append해줘야함
+                df_0_2 = df_0[con2]
 
                 for i in df_0_2.index:
                     filename = df_0_2.at[i, "filename"]
-                    con3 = (self.df.filename == filename) & (self.df.label != cls)  ##다른 클래스의 겹치는 label
+                    con3 = (self.df.filename == filename) & (self.df.label != cls)
 
-                    df_other = self.df[con3]  # 여기서 cls > threshold인 애들 제외하고 append
+                    df_other = self.df[con3]
                     for j in df_other.index:
-                        cls_0 = df_other.at[j, "label"]  # 겹치는 data의 class
-                        if dict_count[cls_0] >= self.threshold:  ####################threshold만큼 append하기로 수정
+                        cls_0 = df_other.at[j, "label"]
+                        if dict_count[cls_0] >= self.threshold:
                             pass
                         else:
                             if len(df_other[con]) == 0:
                                 pass
                             elif random() < (self.threshold - dict_count[cls_0]) / len(
-                                    df_other[con]):  # cls에 남은자리 / df_other중 남은자리
+                                    df_other[con]):
                                 other_list.append(df_other.at[j, "label"])
                                 df_Random = df_Random.append(df_other.loc[[j]])
 
