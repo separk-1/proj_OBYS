@@ -127,17 +127,17 @@ class Foldering:
         else:
             for i in range(len(self.train_dir)):
                 try:
-                    copy_tree(self.my_dir + "Dataset/%s/img/" % (self.train_dir[i]), dst_train + "/img/")
-                    copy_tree(self.my_dir + "Dataset/%s/txt/" % (self.train_dir[i]), dst_train + "/txt/")
+                    copy_tree(self.my_dir + "train/%s/img/" % (self.train_dir[i]), dst_train + "/img/")
+                    copy_tree(self.my_dir + "train/%s/txt/" % (self.train_dir[i]), dst_train + "/txt/")
                 except distutils.errors.DistutilsError:
                     print("%s의 input train list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.train_dir[i]))
 
             for j in range(len(self.val_dir)):
                 try:
-                    copy_tree(self.my_dir + "Dataset/%s/img/" % (self.val_dir[j]), dst_val + "/img/")
-                    copy_tree(self.my_dir + "Dataset/%s/txt/" % (self.val_dir[j]), dst_val + "/txt/")
+                    copy_tree(self.my_dir + "train/%s/img/" % (self.val_dir[j]), dst_val + "/img/")
+                    copy_tree(self.my_dir + "train/%s/txt/" % (self.val_dir[j]), dst_val + "/txt/")
                 except distutils.errors.DistutilsError:
-                    print("%s의 input val list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.val_dir[i]))
+                    print("%s의 input val list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.val_dir[j]))
 
             data = {
                 'train': "%sCase/%s/train" % (self.my_dir, self.case_name),
