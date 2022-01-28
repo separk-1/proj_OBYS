@@ -127,21 +127,21 @@ class Foldering:
         else:
             for i in range(len(self.train_dir)):
                 try:
-                    copy_tree(self.my_dir + "Dataset/%s/img/" % (self.train_dir[i]), dst_train + "/img/")
-                    copy_tree(self.my_dir + "Dataset/%s/txt/" % (self.train_dir[i]), dst_train + "/txt/")
+                    copy_tree(self.my_dir + "210120_AllData/%s/images/" % (self.train_dir[i]), dst_train + "/images/")
+                    copy_tree(self.my_dir + "210120_AllData/%s/labels/" % (self.train_dir[i]), dst_train + "/labels/")
                 except distutils.errors.DistutilsError:
                     print("%s의 input train list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.train_dir[i]))
 
             for j in range(len(self.val_dir)):
                 try:
-                    copy_tree(self.my_dir + "Dataset/%s/img/" % (self.val_dir[j]), dst_val + "/img/")
-                    copy_tree(self.my_dir + "Dataset/%s/txt/" % (self.val_dir[j]), dst_val + "/txt/")
+                    copy_tree(self.my_dir + "210120_AllData/%s/images/" % (self.val_dir[j]), dst_val + "/images/")
+                    copy_tree(self.my_dir + "210120_AllData/%s/labels/" % (self.val_dir[j]), dst_val + "/labels/")
                 except distutils.errors.DistutilsError:
                     print("%s의 input val list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.val_dir[j]))
 
             data = {
                 'train': "%sCase/%s/train" % (self.my_dir, self.case_name),
-                'val': "%sCase/%s/train" % (self.my_dir, self.case_name),
+                'val': "%sCase/%s/val" % (self.my_dir, self.case_name),
                 'nc': 11,
                 'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\","
                          "\"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
@@ -154,12 +154,13 @@ class Foldering:
         return
 
 class Foldering_Random:
-    def __init__(self, case_name, threshold, txt_path):
+    def __init__(self, my_dir, case_name, threshold, txt_path):
+        self.my_dir = my_dir
         self.case_name = case_name
         self.threshold = threshold
         self.txt_path = txt_path
 
-        self.filepath = "./Case/%s/train/labels/*.txt"%(case_name)
+        self.filepath = my_dir+"Case/%s/train/labels/*.txt"%(case_name)
         self.file_list = glob.glob(self.filepath)
 
         Foldering_Random.make_merge_txt(self)
@@ -247,10 +248,10 @@ class Foldering_Random:
             dict_count = collections.Counter(other_list)
 
         filename_list = list(set(list(df_Random["filename"])))
-        os.mkdir("./%s/" % (new_case_name))
+        os.mkdir(self.my_dir + "Case/%s/" % (new_case_name))
         for i in range(len(filename_list)):
             src = filename_list[i]
-            dst = "./%s/"%(new_case_name)
+            dst = self.my_dir + "Case/%s/" % (new_case_name)
             shutil.copy(src, dst)
 
         return df_Random
@@ -264,12 +265,13 @@ class Foldering_Random:
         plot_df = pd.DataFrame({'label': label_list, 'count': count_list})
         plot_df.plot.bar(x='label', y='count', rot=0)
         plt.axhline(y=self.threshold, color='r', linewidth=1)
-        plt.savefig(figpath)
+        plt.savefig(self.my_dir + "Case/%s/%s"%(self.case_name, figpath))
         return
 
     # create merge txt
     def make_merge_txt(self):
-        with open(self.txt_path, 'w') as outfile:
+        txt_path = self.my_dir + "Case/%s/%s"%(self.case_name, self.txt_path)
+        with open(txt_path, 'w') as outfile:
             for filename in sorted(self.file_list):
                 with open(filename) as file:
                     outfile.write(file.read())
