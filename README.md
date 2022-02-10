@@ -115,6 +115,10 @@
   Foldering_Random_1.save_plot(df = Random_df, figpath='"[Random_Plot_name]".png')
    ```
    
+   ```
+   python Set_Dir.py (folder dir 정리)
+   ```
+   
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### 4. Activity Classification
