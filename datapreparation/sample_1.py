@@ -25,30 +25,34 @@ FormatRevision_1.file_filter()
 '''
 
 ## 3.1 Foldering
+
 #Sample_MobaXterm
-my_dir = "/home/obayashi/Projects/proj_obayashi/codes/datapreparation/test_dataset/"
-case_name = "case_1"
-train_dir = ["cycle_1", "cycle_2", "cycle_4"]
-val_dir = ["cycle_3", "cycle_5"]
+case_name = "0309_case_11" ##
+
+my_dir = "/home/obayashi/data/cctv_video/train_data/"
+train_data = my_dir+"%s.xlsx"%(case_name)
+train_df = pd.read_excel(train_data)
+train_dir = list(train_df[train_df['type'] == 'train']["cycle"])
+val_dir = list(train_df[train_df['type'] == 'val']["cycle"])
+
 Foldering_1 = Foldering(my_dir, case_name, train_dir, val_dir)
 Foldering_1.foldering()
 
-#Sample_Local
-my_dir = "./"
-case_name = "case_cycle1"
-train_dir = ["cycle1_1", "cycle1_2"]
-val_dir = ["cycle1_3"]
-Foldering_1 = Foldering(my_dir, case_name, train_dir, val_dir)
-Foldering_1.foldering()
+
 
 ## 3.2 Random_Foldering
+my_dir = "/home/obayashi/data/cctv_video/train_data/Case/"
+case_name = "case_simple"
+threshold = 100
 
-Foldering_Random_1 = Foldering_Random(case_name= "case_cycle1",
-                                      threshold = 1000,
-                                      txt_path='filenames.txt')
+Foldering_Random_1 = Foldering_Random(my_dir = my_dir,
+                                      case_name= case_name,
+                                      threshold = threshold)
 
 origin_df = Foldering_Random_1.origin_df()
-#Foldering_Random_1.save_plot(df = origin_df, figpath='origin_plot.png')
+Foldering_Random.save_plot(df = origin_df, threshold = threshold, figpath=my_dir+'%s/simple_origin_plot.png'%(case_name)) 
 
 Random_df = Foldering_Random_1.Random_df()
-#Foldering_Random_1.save_plot(df = Random_df, figpath='random_plot.png')
+Foldering_Random_1.Set_Dir()
+Foldering_Random.save_plot(df = Random_df, threshold = threshold, figpath=my_dir+'%s_%s/simple_random_plot.png'%(case_name, threshold))
+
