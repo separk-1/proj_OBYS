@@ -36,7 +36,7 @@ class FrameExtraction:
             ret, image = vidcap.read()
             # 이미지 사이즈 960x540으로 변경
             # image = cv2.resize(image, (960, 540))
-            if count == math.floor(vidcap.get(cv2.CAP_PROP_FRAME_COUNT)/fps_int):
+            if count == math.floor(vidcap.get(cv2.CAP_PROP_FRAME_COUNT) / fps_int):
                 break
             else:
                 if (int(vidcap.get(1)) % fps_int == 0):
@@ -47,7 +47,6 @@ class FrameExtraction:
                     count += 1
                 else:
                     pass
-
 
         vidcap.release()
         return
@@ -110,6 +109,7 @@ class FormatRevision:
             print(file + " is revised")
         return
 
+
 class Foldering:
     def __init__(self, my_dir, case_name, train_dir, val_dir):
         self.my_dir = my_dir
@@ -153,22 +153,20 @@ class Foldering:
             print("%s 업로드 완료" % (self.case_name))
         return
 
+
 class Foldering_Random:
-    def __init__(self, my_dir, case_name, threshold, txt_path):
+    def __init__(self, my_dir, case_name, threshold):
         self.my_dir = my_dir
         self.case_name = case_name
         self.threshold = threshold
-        self.txt_path = txt_path
 
-        self.filepath = my_dir+"Case/%s/train/labels/*.txt"%(case_name)
+        self.filepath = my_dir + "%s/train/labels/*.txt" % (case_name)
         self.file_list = glob.glob(self.filepath)
 
         Foldering_Random.make_merge_txt(self)
-        self.df = Foldering_Random.origin_df(self)
 
     # create dataframe
     def origin_df(self):
-        Foldering_Random.make_merge_txt(self)
         filename_list = list()
         labelcount_list = list()
         for filename in sorted(self.file_list):
@@ -182,7 +180,8 @@ class Foldering_Random:
                 counted_filename_list.append(filename_list[i])
 
         colnames = ['label', 'x_center', 'y_center', 'width', 'height']
-        data = pd.read_csv(self.txt_path, sep="   ", engine='python', encoding="cp949", names=colnames)
+        data = pd.read_csv(self.my_dir + "%s.txt" % (self.case_name), sep="   ", engine='python', encoding="cp949",
+                           names=colnames)
         data["filename"] = counted_filename_list
 
         label_count = list()
@@ -195,86 +194,81 @@ class Foldering_Random:
     def Random_df(self):
         global dict
 
-        new_case_name = self.case_name + "_" + str(self.threshold)
-
         cls_list = list(range(11))
-        zero_list = [0 for i in range(11)]
-        dict_count = dict(zip(cls_list, zero_list))
+        count_list = [0 for i in range(11)]
+        dict_count = dict(zip(cls_list, count_list))
 
-        other_list = list()
+        threshold = 100
+
         df_Random = pd.DataFrame()
-        for cls in range(0, 11):
-            if dict_count[cls] >= self.threshold:
-                pass
+        filename_list = list()
 
-            else:
-                con = (self.df.label == cls)
-                if len(self.df[con]) >= self.threshold:
-                    df_0 = self.df[con].sample(self.threshold)
-                    for k in range(self.threshold):
-                        other_list.append(cls)
+        storage = threshold
+
+        tryNum = 0
+
+        while tryNum < (threshold/10):
+            tryNum += 1
+            for cls in range(0, 11):
+                storage = threshold - dict_count[cls]
+
+                if storage < 0:
+                    pass
+
                 else:
-                    df_0 = self.df[con].sample(len(self.df[con]))
-                    for k in range(len(self.df[con])):
-                        other_list.append(cls)
+                    con = (self.origin_df.label == cls)
+                    if len(self.origin_df[con]) <= storage:
+                        df_0 = self.origin_df[con].sample(int(len(self.origin_df[con])))
 
-                labelcount_list = list()
-                for i in df_0.index:
-                    labelcount_list.append(
-                        len(self.df[self.df.filename == self.df.at[i, "filename"]]))
-                df_0["labelcount"] = labelcount_list
-                df_Random = df_Random.append(df_0)
+                    else:
+                        df_0 = self.origin_df[con].sample(int(storage / (threshold/10)))
 
-                con2 = (df_0.labelcount > 1)
-                df_0_2 = df_0[con2]
+                    filename_list.extend(df_0["filename"])
 
-                for i in df_0_2.index:
-                    filename = df_0_2.at[i, "filename"]
-                    con3 = (self.df.filename == filename) & (self.df.label != cls)
-
-                    df_other = self.df[con3]
-                    for j in df_other.index:
-                        cls_0 = df_other.at[j, "label"]
-                        if dict_count[cls_0] >= self.threshold:
-                            pass
-                        else:
-                            if len(df_other[con]) == 0:
-                                pass
-                            elif random() < (self.threshold - dict_count[cls_0]) / len(
-                                    df_other[con]):
-                                other_list.append(df_other.at[j, "label"])
-                                df_Random = df_Random.append(df_other.loc[[j]])
-
-            dict_count = collections.Counter(other_list)
+        dict_count = Foldering_Random.get_count_dict(
+            Foldering_Random.count_cls_by_filenamelist(self.origin_df, filename_list))
+        df_Random = Foldering_Random.filter_df_by_filenamelist(self.origin_df, filename_list)
 
         filename_list = list(set(list(df_Random["filename"])))
-        os.mkdir(self.my_dir + "Case/%s/" % (new_case_name))
+        os.mkdir(self.my_dir + "labels/")
         for i in range(len(filename_list)):
             src = filename_list[i]
-            dst = self.my_dir + "Case/%s/" % (new_case_name)
+            dst = self.my_dir + "labels/"
             shutil.copy(src, dst)
 
         return df_Random
 
-    # save histogram by dataframe
-    def save_plot(self, df, figpath):
-        label_list = list(range(11))
-        count_list = list()
-        for i in label_list:
-            count_list.append(list(df['label']).count(i))
-        plot_df = pd.DataFrame({'label': label_list, 'count': count_list})
-        plot_df.plot.bar(x='label', y='count', rot=0)
-        plt.axhline(y=self.threshold, color='r', linewidth=1)
-        plt.savefig(self.my_dir + "Case/%s/%s"%(self.case_name, figpath))
-        return
-
     # create merge txt
     def make_merge_txt(self):
-        txt_path = self.my_dir + "Case/%s/%s"%(self.case_name, self.txt_path)
-        with open(txt_path, 'w') as outfile:
+        txt = self.my_dir + "%s.txt" % (self.case_name)
+        with open(txt, 'w') as outfile:
             for filename in sorted(self.file_list):
                 with open(filename) as file:
                     outfile.write(file.read())
+        return
+
+    # directory setting
+    def Set_Dir(self):
+        os.makedirs(self.my_dir + "%s_%s/train/images" % (self.case_name, self.threshold))
+        file_name = []
+        file_list = os.listdir(self.my_dir + "labels")
+        for file in file_list:
+            if file.count(".") == 1:
+                name = file.split('.')[0]
+                file_name.append(name)
+            else:
+                for k in range(len(file) - 1, 0, -1):
+                    if file[k] == '.':
+                        file_name.append(file[:k])
+                        break
+
+        dst = self.my_dir + "%s_%s/train/images/" % (self.case_name, self.threshold)
+        for file in file_name:
+            src = self.my_dir + "%s/train/images/" % (self.case_name) + file + ".jpg"
+            shutil.copy(src, dst)
+
+        shutil.move(self.my_dir + "labels", self.my_dir + "%s_%s/train" % (self.case_name, self.threshold))
+        # shutil.move(self.my_dir+"%s/val"%(self.case_name), self.my_dir + "%s_%s/"%(self.case_name, self.threshold))
         return
 
     # filename에 해당하는 label list
@@ -288,3 +282,44 @@ class Foldering_Random:
             label_list.append(line.split("   ")[0])
         f.close()
         return label_list
+
+    # save histogram by dataframe
+    @classmethod
+    def save_plot(cls, df, threshold, figpath):
+        label_list = list(range(11))
+        count_list = list()
+        for i in label_list:
+            count_list.append(list(df['label']).count(i))
+        plot_df = pd.DataFrame({'label': label_list, 'count': count_list})
+        plot_df.plot.bar(x='label', y='count', rot=0)
+        plt.axhline(y=threshold, color='r', linewidth=1)
+        plt.savefig(figpath)
+        return
+
+    @classmethod
+    # filename에 해당하는 class count
+    def count_cls_by_filenamelist(cls, origin_df, filename_list):
+        label_list = list()
+        for filename in filename_list:
+            label_list.extend(origin_df[origin_df.filename == filename]["label"])
+        return label_list
+
+    @classmethod
+    def get_count_dict(cls, label_list):
+        cls_list = list(range(11))
+        count_list = list()
+        for i in cls_list:
+            count_list.append(label_list.count(i))
+        dict_count = dict(zip(cls_list, count_list))
+        return dict_count
+
+    @classmethod
+    # filename에 해당하는 filename_df
+    def filter_df_by_filenamelist(cls, origin_df, filename_list):
+        index_list = list()
+        for i in origin_df.index:
+            if origin_df.at[i, "filename"] in filename_list:
+                index_list.append(i)
+            else:
+                pass
+        return origin_df.loc[index_list]
