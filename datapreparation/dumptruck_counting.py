@@ -1,7 +1,7 @@
 import pandas as pd
 import cv2
 
-def get_count_from_time(time, df):
+def get_dumptruck_count_from_time(time, df):
     count_list = list()
     count = 1
     for i in df.index:
@@ -23,7 +23,7 @@ width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 fps = cap.get(cv2.CAP_PROP_FPS)
 fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-out = cv2.VideoWriter('out.mp4', fourcc, fps, (int(width), int(height))) ### output video
+out = cv2.VideoWriter('cycle2_dumptruck.mp4', fourcc, fps, (int(width), int(height))) ### output video
 
 time = 0
 count_text = "0"
@@ -35,7 +35,7 @@ while (True):
 
     font = cv2.FONT_HERSHEY_SIMPLEX
 
-    count = get_count_from_time(time, counting_df)
+    count = get_dumptruck_count_from_time(time, counting_df)
     if count is not None:
         count_text = count
         color = (0, 0, 255)
