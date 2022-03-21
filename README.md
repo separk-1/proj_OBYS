@@ -152,6 +152,16 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### 5. Equipment counting
+  * Change only the following parameters
+```sh
+   video_path = ("./data/cycle2.mp4")
+   counting_df = pd.read_excel("./data/dumptruck_counting.xlsx")
+   out = cv2.VideoWriter('out.mp4', fourcc, fps, (int(width), int(height)))
+   'Dump Truck %s'%(count_text)
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- ROADMAP -->
