@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1b4ca7f5-1fb0-43ea-9829-e0153bf792ad" name="Default Changelist" comment="add code">
       <change beforePath="$PROJECT_DIR$/config/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/architecture.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +17,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/code/yolov5" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -37,7 +36,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../snucem_prod_db" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/image" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -279,7 +278,21 @@
       <option name="project" value="LOCAL" />
       <updated>1652777546680</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add code">
+      <created>1652777874936</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1652777874936</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add code">
+      <created>1652777883405</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1652777883405</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
