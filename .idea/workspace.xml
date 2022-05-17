@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b4ca7f5-1fb0-43ea-9829-e0153bf792ad" name="Default Changelist" comment="update Readme &amp; requirement">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1b4ca7f5-1fb0-43ea-9829-e0153bf792ad" name="Default Changelist" comment="update Readme">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/Config.py" afterDir="false" />
     </list>
@@ -322,7 +321,21 @@
       <option name="project" value="LOCAL" />
       <updated>1652779898130</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="update Readme">
+      <created>1652780197249</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1652780197249</updated>
+    </task>
+    <task id="LOCAL-00022" summary="update Readme">
+      <created>1652780454555</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1652780454555</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -348,8 +361,8 @@
     <MESSAGE value="delete" />
     <MESSAGE value="add files" />
     <MESSAGE value="add code" />
-    <MESSAGE value="update Readme" />
     <MESSAGE value="update Readme &amp; requirement" />
-    <option name="LAST_COMMIT_MESSAGE" value="update Readme &amp; requirement" />
+    <MESSAGE value="update Readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Readme" />
   </component>
 </project>

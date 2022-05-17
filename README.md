@@ -17,9 +17,9 @@
     <li>
       <a href="#usage">Usage</a>
       <ul>
-        <li><a href="#0. Dataset">0. Dataset</a></li>
-        <li><a href="#1. DataPreprocessing">1. DataPreprocessing</a></li>
-        <li><a href="#2. Train & Predict">2. Train & Predict</a></li>
+        <li><a href="#0. Dataset">0. Dataset</a></li></ul>
+        <li><a href="#1. DataPreprocessing">1. DataPreprocessing</a></li></ul>
+        <li><a href="#2. Train & Predict">2. Train & Predict</a></li></ul>
         <li><a href="#3. Result Analysis">3. Result Analysis</a></li>
       </ul>
     </li>
