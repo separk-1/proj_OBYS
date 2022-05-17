@@ -91,10 +91,13 @@
 ```sh
    from DataPreprocessing import Foldering
    
+   case_name = "[case_name]"
+   
    my_dir = "[dataset folder]"
-   case_name = "case_1"
-   train_dir = ["cycle_1", "cycle_2", "cycle_4"]
-   val_dir = ["cycle_3", "cycle_5"]
+   train_data = my_dir+"%s.xlsx"%(case_name)
+   train_df = pd.read_excel(train_data)
+   train_dir = list(train_df[train_df['type'] == 'train']["cycle"])
+   val_dir = list(train_df[train_df['type'] == 'val']["cycle"])
    
    Foldering_1 = Foldering(my_dir, case_name, train_dir, val_dir)
    
@@ -105,14 +108,25 @@
 ```sh
    from DataPreprocessing import Foldering_Random
   
-   Foldering_Random_1 = Foldering_Random(case_name= "[Case_name]",
-                                      threshold = "[Threshold]",
-                                      txt_path='"[Anyfilename]".txt')
+  my_dir = "/home/obayashi/data/cctv_video/train_data/Case/"
+  case_name = "case_simple"
+  threshold = 100
+
+  Foldering_Random_1 = Foldering_Random(my_dir = my_dir,
+                                        case_name= case_name,
+                                        threshold = threshold)
+
   origin_df = Foldering_Random_1.origin_df()
-  Foldering_Random_1.save_plot(df = origin_df, figpath='"[Original_Plot_name]".png')
-  
+  Foldering_Random.save_plot(df = origin_df, threshold = threshold, figpath=my_dir+'%s/simple_origin_plot.png'%(case_name)) 
+
   Random_df = Foldering_Random_1.Random_df()
-  Foldering_Random_1.save_plot(df = Random_df, figpath='"[Random_Plot_name]".png')
+  Foldering_Random_1.Set_Dir()
+  Foldering_Random.save_plot(df = Random_df, threshold = threshold, figpath=my_dir+'%s_%s/simple_random_plot.png'%(case_name, threshold))
+
+   ```
+   
+   ```
+   python Set_Dir.py (folder dir 정리)
    ```
    
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -138,6 +152,16 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### 5. Equipment counting
+  * Change only the following parameters
+```sh
+   video_path = ("./data/cycle2.mp4")
+   counting_df = pd.read_excel("./data/dumptruck_counting.xlsx")
+   out = cv2.VideoWriter('out.mp4', fourcc, fps, (int(width), int(height)))
+   'Dump Truck %s'%(count_text)
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- ROADMAP -->
