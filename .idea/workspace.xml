@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b4ca7f5-1fb0-43ea-9829-e0153bf792ad" name="Default Changelist" comment="add code">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1b4ca7f5-1fb0-43ea-9829-e0153bf792ad" name="Default Changelist" comment="update Readme">
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DataPreprocessing.bat" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DataPreprocessing.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/Config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -309,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652778745350</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="update Readme">
+      <created>1652779780924</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1652779780924</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -335,6 +341,7 @@
     <MESSAGE value="delete" />
     <MESSAGE value="add files" />
     <MESSAGE value="add code" />
-    <option name="LAST_COMMIT_MESSAGE" value="add code" />
+    <MESSAGE value="update Readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Readme" />
   </component>
 </project>

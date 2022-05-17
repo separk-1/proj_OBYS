@@ -48,7 +48,7 @@
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-###0. Dataset
+### 0. Dataset
 * raw_data: 가공 전 labeled dataset
 * case_data: 
   - case_data: foldering 결과 dataset
