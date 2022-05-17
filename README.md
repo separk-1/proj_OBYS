@@ -14,8 +14,15 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#0. Dataset">0. Dataset</a></li>
+        <li><a href="#1. DataPreprocessing">1. DataPreprocessing</a></li>
+        <li><a href="#2. Train & Predict">2. Train & Predict</a></li>
+        <li><a href="#3. Result Analysis">3. Result Analysis</a></li>
+      </ul></li>
+    <li><a href="#architecture">Architecture</a></li>
   </ol>
 </details>
 
@@ -79,7 +86,7 @@ codes/Run_Datapreprocessing.py -m Augmentation
 ### 3. Result Analysis
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- ROADMAP -->
+<!-- Architecture -->
 ## Architecture
 ![Createplan](./image/architecture.png)
 
