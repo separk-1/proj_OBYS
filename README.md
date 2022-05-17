@@ -31,7 +31,11 @@
    ```sh
    git clone https://github.com/separk-1/proj_OBSYS.git
    ```
-3. Install packages
+2. Create conda environment
+```sh
+   conda env create -f my_env.yaml  
+   ```
+4. Install packages
    ```sh
    pip install -r requirements.txt  
    ```
