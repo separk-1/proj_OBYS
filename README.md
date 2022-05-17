@@ -25,6 +25,7 @@
 ## About The Project
 
 * Obayashi project code
+* MobaXterm: /home/obayashi/Projects/obayashi_practice/
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -47,138 +48,39 @@
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-### 1. Frame Extraction
-* video to frame & frame to video
+###0. Dataset
+* raw_data: 가공 전 labeled dataset
+* case_data: 
+  - case_data: foldering 결과 dataset
+  - case_data_threshold: foldering_random으로 case_data의 class별 데이터 수를 threshold로 맞춘 dataset
+* test_data: video for test
+* activity_recognition
+    
+### 1. DataPreprocessing
+#### 1) Set config
+* Set parameter for running
+* path: /config/config.yaml
+#### 2) DataPreprocessing
+* Select mode by parser
+* path: /bin/DataPreprocessing.bat
 ```sh
-   from DataPreprocessing import FrameExtraction
-   
-   ext_vidpath="[추출하고자 하는 video path]"
-   save_imgpath="[추출한 이미지를 저장하는 image path]"
-   ext_imgpath="[변환하고자 하는 image path]"
-   save_vidpath="[변환한 이미지를 저장하는 video path]"
-   
-   FrameExtraction_1 = FrameExtraction(ext_vidpath, save_imgpath, ext_imgpath, save_vidpath)
-   
-   FrameExtraction_1.video_to_frame()
-   FrameExtraction_1.video_to_frame()
-   ```
-   
-### 2. Format Revision
-* file filter
-```sh
-   from DataPreprocessing import FormatRevision
-   import os
-   
-   label_list = os.listdir("[file path]")
-   image_list = os.listdir("[file path]")
-   
-   FormatRevision_1 = FormatRevision(label_list, image_list)
-   
-   FormatRevision_1.file_filter()
-   ```
-* txt_revised
-```sh
-   import os
-   import re
-   import natsort
-   
-   FormatRevision.txt_revised("[file path]")
-   ```
-
-
-### 3.1 Foldering
-```sh
-   from DataPreprocessing import Foldering
-   
-   case_name = "[case_name]"
-   
-   my_dir = "[dataset folder]"
-   train_data = my_dir+"%s.xlsx"%(case_name)
-   train_df = pd.read_excel(train_data)
-   train_dir = list(train_df[train_df['type'] == 'train']["cycle"])
-   val_dir = list(train_df[train_df['type'] == 'val']["cycle"])
-   
-   Foldering_1 = Foldering(my_dir, case_name, train_dir, val_dir)
-   
-   Foldering_1.foldering()
-   ```
-
-### 3.2 Foldering_Random
-```sh
-   from DataPreprocessing import Foldering_Random
-  
-  my_dir = "/home/obayashi/data/cctv_video/train_data/Case/"
-  case_name = "case_simple"
-  threshold = 100
-
-  Foldering_Random_1 = Foldering_Random(my_dir = my_dir,
-                                        case_name= case_name,
-                                        threshold = threshold)
-
-  origin_df = Foldering_Random_1.origin_df()
-  Foldering_Random.save_plot(df = origin_df, threshold = threshold, figpath=my_dir+'%s/simple_origin_plot.png'%(case_name)) 
-
-  Random_df = Foldering_Random_1.Random_df()
-  Foldering_Random_1.Set_Dir()
-  Foldering_Random.save_plot(df = Random_df, threshold = threshold, figpath=my_dir+'%s_%s/simple_random_plot.png'%(case_name, threshold))
-
-   ```
-   
-   ```
-   python Set_Dir.py (folder dir 정리)
-   ```
-   
+codes/Run_Datapreprocessing.py -m Foldering
+codes/Run_Datapreprocessing.py -m Foldering_Random
+codes/Run_Datapreprocessing.py -m Video_to_frame
+codes/Run_Datapreprocessing.py -m Frame_to_video
+codes/Run_Datapreprocessing.py -m FormatRevision
+codes/Run_Datapreprocessing.py -m Augmentation
+```
+### 2. Train & Predict
+#### 1) OD_train
+#### 2) OD_predict
+#### 3) AR_train
+#### 4) AR_predict
+### 3. Result Analysis
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-### 4. Activity Classification
-   * We use LSTM networks here for classifying (&predicting) classes of activities. 
-   It could be divided into "Train" part, and "Test" part. 
-   Each you can check in python files belows:
-   Train >lstm_obayashi.py 
-   Test > lstm_obayashi_test.py
-   
-   While training (run lstm_obayashi.py file), "*.h5" files are being made.
-   Testing(Predicting) could be done by importing "*.h5" files, maded while training. 
-   
-   You could train with your custom data by changing the path : code below.
-```sh
-   DATASET_PATH = "*.csv"
-   x_train_path = DATASET_PATH + "X_train.csv"
-   x_test_path = DATASET_PATH + "X_test.csv"
-   y_train_path = DATASET_PATH + "y_train.csv"
-   y_test_path = DATASET_PATH + "y_test.csv"
-   ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-### 5. Equipment counting
-  * Change only the following parameters
-```sh
-   video_path = ("./data/cycle2.mp4")
-   counting_df = pd.read_excel("./data/dumptruck_counting.xlsx")
-   out = cv2.VideoWriter('out.mp4', fourcc, fps, (int(width), int(height)))
-   'Dump Truck %s'%(count_text)
-   ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- ROADMAP -->
-## Roadmap
-### Data Preprocessing
-- [x] 1. Frame Extraction 
-    - [x] video_to_frame.py
-    - [x] frame_to_video.py
-- [ ] 2. FormatRivision (Utils)
-    - [x] file_filter.py : 라벨 안 된 이미지 파일 삭제
-    - [ ] dataset_randoim_div : data를 train, val set으로 분리
-    - [ ] txt_revised : labeling 결과 txt format 변환 (,)->( )
-    - [ ] txt_to_timetable.py 
-- [x] 3. Foldering
-
-### Next Step
-
+## Architecture
 ![Createplan](./image/architecture.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
