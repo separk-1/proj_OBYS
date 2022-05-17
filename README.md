@@ -16,14 +16,12 @@
 </details>
 
 
----
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 * Obayashi project code
 * MobaXterm: /home/obayashi/Projects/obayashi_practice/
 <p align="right">(<a href="#top">back to top</a>)</p>
 
----
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -40,7 +38,6 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
----
 <!-- USAGE EXAMPLES -->
 ## Usage
 ### 0. Dataset
@@ -50,7 +47,7 @@
   - case_data_threshold: foldering_random으로 case_data의 class별 데이터 수를 threshold로 맞춘 dataset
 * test_data: video for test
 * activity_recognition
----
+
 ### 1. DataPreprocessing
 #### 1) Set config
 * Set parameter for running
@@ -66,18 +63,18 @@ codes/Run_Datapreprocessing.py -m Frame_to_video
 codes/Run_Datapreprocessing.py -m FormatRevision
 codes/Run_Datapreprocessing.py -m Augmentation
 ```
----
+
 ### 2. Train & Predict
 #### 1) OD_train
 #### 2) OD_predict
 #### 3) AR_train
 #### 4) AR_predict
 
----
+
 ### 3. Result Analysis
 <p align="right">(<a href="#top">back to top</a>)</p>
 
----
+
 <!-- Architecture -->
 ## Architecture
 ![Createplan](./image/architecture.png)
