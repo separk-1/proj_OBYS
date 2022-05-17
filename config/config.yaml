@@ -1,0 +1,62 @@
+ACTIVITY_RECOGNITION:
+  train : 
+    input_dir : ../dataset/activity_recognition/sample.csv
+    N_TIME_STEPS : 10
+    step : 1
+    num_equipment : 11
+    n_classes : 7
+    res_dir : ../results/AR_train_result
+    epoch : 100
+    
+    #sensitivy analysis
+    n_hidden : 64
+    batch_size : 32
+    
+  
+  predict : 
+    input_file : ../dataset/activity_recognition/test2.csv
+    trained_model : ../results/AR_train_result/sample_lstm_epoch1_timestep10.h5
+    N_TIME_STEPS : 10
+    step : 1
+    num_equipment : 11
+    n_classes : 7
+    res_dir : ../results/AR_prediction_result/prediction.csv
+    
+  comparison : 
+    input_file : ../dataset/activity_recognition/test.csv
+    trained_model : ../results/AR_train_result/sample_lstm_epoch1_timestep10.h5
+    N_TIME_STEPS : 10
+    step : 1
+    num_equipment : 11
+    n_classes : 7
+    res_dir : ../results/AR_prediction_result/comparison
+    
+  
+DATAPREPROCESSING:
+  Foldering:
+    case_name: case_sample
+    my_dir: ./dataset/
+    train_dir: cycle1_1,cycle2_1,cycle3_1,cycle4_1
+    val_dir: cycle5_1
+  
+  Foldering_Random:
+    case_name: case_sample
+    my_dir: ./dataset/case_data/
+    threshold: 1000
+  
+  Video_to_frame:
+    input_dir: ./dataset/test_data/cycle2.mp4
+    output_dir: ./dataset/test_data/
+  
+  Frame_to_video:
+    input_dir: ./dataset/test_data/resized_XX/
+    output_dir: ./dataset/test_data/XX.mp4
+  
+  FormatRevision:
+    label_list: os.listdir("**dir")
+    image_list: os.listdir("**dir")
+    
+  Augmentation:
+    input_dir : /home/obayashi/data/Used_worker_data/220318_Used/Adjust_New_Worker/train/
+    output_dir : /home/obayashi/data/Used_worker_data/220407_augmentation/
+    size : 4
