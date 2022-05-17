@@ -1,0 +1,37 @@
+OBJECT DETECTION:
+    training:
+    
+    prediction:
+
+
+RESULT_ANALYSIS:
+    time_table:
+        input_ID_data: './cycle2_ID_mod_act.csv'
+        time_table_output_dir: './result_analysis_result/time_table'
+        time_interval: 60 #sec  
+        
+    activity_cycle_time:
+        input_ID_data: './cycle2_ID_mod_act.csv'
+        cycle_time_output_dir: './result_analysis_result/activity_cycle_time_result'
+        activity_class: ["Drilling&Loading", "Mucking", "Scaling", "Spraying", "H_beam", "Rock_bolting", "nothing"]
+
+    counting_dumptruck:
+        input_ID_data: './cycle2_ID_mod_act.csv'
+        cycle_time_data: './result_analysis_result/activity_cycle_time_result/act_time.csv'
+        counting_output_dir: './result_analysis_result/counting_equipment'
+        
+    counting_payloader:
+        input_XY_data: './cycle2_xy_mod_v2.csv'
+        dumptruck_counting_data: './result_analysis_result/counting_equipment/dumptruck_counting.csv'
+        counting_output_dir: './result_analysis_result/counting_equipment'
+        
+    result_analysis:
+        input_ID_data: './cycle2_ID_mod_act.csv'
+        input_XY_data: './cycle2_xy_mod_v2.csv'
+        time_table_output_dir: './result_analysis_result/time_table'
+        cycle_time_output_dir: './result_analysis_result/activity_cycle_time_result'
+        cycle_time_data: './result_analysis_result/activity_cycle_time_result/act_time.csv'
+        counting_output_dir: './result_analysis_result/counting_equipment'
+        dumptruck_counting_data: './result_analysis_result/counting_equipment/dumptruck_counting.csv'
+        time_interval: 60 #sec  
+        activity_class: ["Drilling&Loading", "Mucking", "Scaling", "Spraying", "H_beam", "Rock_bolting", "nothing"]
