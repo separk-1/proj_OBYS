@@ -41,11 +41,11 @@
 <!-- USAGE EXAMPLES -->
 ## Usage
 ### 0. Dataset
-* raw_data: 가공 전 labeled dataset
+* raw_data
 * case_data: 
-  - case_data: foldering 결과 dataset
-  - case_data_threshold: foldering_random으로 case_data의 class별 데이터 수를 threshold로 맞춘 dataset
-* test_data: video for test
+  - case_data
+  - case_data_threshol
+* test_data
 * activity_recognition
 
 ### 1. DataPreprocessing
