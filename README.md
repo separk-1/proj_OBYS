@@ -21,8 +21,10 @@
         <li><a href="#1. DataPreprocessing">1. DataPreprocessing</a></li>
         <li><a href="#2. Train & Predict">2. Train & Predict</a></li>
         <li><a href="#3. Result Analysis">3. Result Analysis</a></li>
-      </ul></li>
-    <li><a href="#architecture">Architecture</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#architecture">Architecture</a></li>
   </ol>
 </details>
 
