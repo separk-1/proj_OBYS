@@ -36,10 +36,6 @@
    cd installation
    conda env create -f my_env.yaml  
    ```
-4. Install packages
-   ```sh
-   pip install -r requirements.txt  
-   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
