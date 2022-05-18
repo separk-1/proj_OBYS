@@ -45,7 +45,7 @@
 * raw_data
 * case_data: 
   - case_data
-  - case_data_threshol
+  - case_data_threshold
 * test_data
 * activity_recognition
 
