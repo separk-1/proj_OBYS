@@ -19,7 +19,7 @@ from scipy import stats
 import seaborn as sns
 import argparse
 import sys
-sys.path.append("../../..")
+sys.path.append("..")
 import yaml
 
 
