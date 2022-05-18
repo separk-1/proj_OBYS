@@ -1,37 +1,3 @@
-ACTIVITY_RECOGNITION:
-  train : 
-    input_dir : ../dataset/activity_recognition/sample.csv
-    N_TIME_STEPS : 10
-    step : 1
-    num_equipment : 11
-    n_classes : 7
-    res_dir : ../results/AR_train_result
-    epoch : 100
-    
-    #sensitivy analysis
-    n_hidden : 64
-    batch_size : 32
-    
-  
-  predict : 
-    input_file : ../dataset/activity_recognition/test2.csv
-    trained_model : ../results/AR_train_result/sample_lstm_epoch1_timestep10.h5
-    N_TIME_STEPS : 10
-    step : 1
-    num_equipment : 11
-    n_classes : 7
-    res_dir : ../results/AR_prediction_result/prediction.csv
-    
-  comparison : 
-    input_file : ../dataset/activity_recognition/test.csv
-    trained_model : ../results/AR_train_result/sample_lstm_epoch1_timestep10.h5
-    N_TIME_STEPS : 10
-    step : 1
-    num_equipment : 11
-    n_classes : 7
-    res_dir : ../results/AR_prediction_result/comparison
-    
-  
 DATAPREPROCESSING:
   Foldering:
     case_name: case_sample
@@ -60,3 +26,97 @@ DATAPREPROCESSING:
     input_dir : /home/obayashi/data/Used_worker_data/220318_Used/Adjust_New_Worker/train/
     output_dir : /home/obayashi/data/Used_worker_data/220407_augmentation/
     size : 4
+
+
+
+OBJECT_DETECTION:
+  training:
+    batch : '4'
+    epochs : '10'
+    traindata : '../case_data/case_sample_1000/case_sample_1000.yaml'
+    pre_weights : '../weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
+    save_name : 'case_sample_1000'
+    save_dir : '../weights/OD_train_result/'
+
+  prediction:
+    file_name: 'cycle2.mp4'
+    detect_model: './yolov5/detect_Draw_Line.py'
+    source: '../dataset/test_data/'
+    weights: '../weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
+    conf: '0.25'
+    save_dir: '../results/OD_predict_result/'
+          
+  postprocessing:
+    path: '../results/OD_predict_result/cycle2/'
+    file_name: 'cycle2.pkl'
+    save_dir: '../results/OD_predict_result/cycle2/'
+
+
+ACTIVITY_RECOGNITION:
+  train : 
+    input_dir : ../dataset/activity_recognition/sample.csv
+    N_TIME_STEPS : 10
+    step : 1
+    num_equipment : 11
+    n_classes : 7
+    res_dir : ../weights/AR_train_result
+    epoch : 100
+    
+    #sensitivy analysis
+    n_hidden : 64
+    batch_size : 32
+    
+  
+  predict : 
+    input_file : ../dataset/activity_recognition/test2.csv
+    trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
+    N_TIME_STEPS : 10
+    step : 1
+    num_equipment : 11
+    n_classes : 7
+    res_dir : ../results/AR_prediction_result/prediction.csv
+    
+  comparison : 
+    input_file : ../dataset/activity_recognition/test.csv
+    trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
+    N_TIME_STEPS : 10
+    step : 1
+    num_equipment : 11
+    n_classes : 7
+    res_dir : ../results/AR_prediction_result/comparison
+    
+
+RESULT_ANALYSIS:
+  time_table:
+    input_ID_data: './cycle2_ID_mod_act.csv'
+    time_table_output_dir: './result_analysis_result/time_table'
+    time_interval: 60 #sec  
+      
+  activity_cycle_time:
+    input_ID_data: './cycle2_ID_mod_act.csv'
+    cycle_time_output_dir: './result_analysis_result/activity_cycle_time_result'
+    activity_class: ["Drilling&Loading", "Mucking", "Scaling", "Spraying", "H_beam", "Rock_bolting", "nothing"]
+
+  counting_dumptruck:
+    input_ID_data: './cycle2_ID_mod_act.csv'
+    cycle_time_data: './result_analysis_result/activity_cycle_time_result/act_time.csv'
+    counting_output_dir: './result_analysis_result/counting_equipment'
+    
+  counting_payloader:
+    input_XY_data: './cycle2_xy_mod_v2.csv'
+    dumptruck_counting_data: './result_analysis_result/counting_equipment/dumptruck_counting.csv'
+    counting_output_dir: './result_analysis_result/counting_equipment'
+    
+  result_analysis:
+    input_ID_data: './cycle2_ID_mod_act.csv'
+    input_XY_data: './cycle2_xy_mod_v2.csv'
+    time_table_output_dir: './result_analysis_result/time_table'
+    cycle_time_output_dir: './result_analysis_result/activity_cycle_time_result'
+    cycle_time_data: './result_analysis_result/activity_cycle_time_result/act_time.csv'
+    counting_output_dir: './result_analysis_result/counting_equipment'
+    dumptruck_counting_data: './result_analysis_result/counting_equipment/dumptruck_counting.csv'
+    time_interval: 60 #sec  
+    activity_class: ["Drilling&Loading", "Mucking", "Scaling", "Spraying", "H_beam", "Rock_bolting", "nothing"]
+
+
+
