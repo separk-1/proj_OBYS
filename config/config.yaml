@@ -54,10 +54,11 @@ OBJECT_DETECTION:
 
 ACTIVITY_RECOGNITION:
   train : 
+    #path of input file and output file
     input_dir : ../dataset/activity_recognition/sample.csv
     res_dir : ../weights/AR_train_result
-    N_TIME_STEPS : 10
-    step : 1
+   
+    #set number of equipment being detected and the number of activity class
     num_equipment : 11
     n_classes : 7
     epoch : 100
@@ -65,21 +66,34 @@ ACTIVITY_RECOGNITION:
     #sensitivy analysis
     n_hidden : 64
     batch_size : 32
-    
+    N_TIME_STEPS : 10
+    step : 1
+    epoch : 100
+ 
  
   predict : 
+    #path of input file and output file
     input_file : ../dataset/activity_recognition/test2.csv
     res_dir : ../results/AR_prediction_result/prediction.csv
+    
+    #saved model you use for prediction
     trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
+    
+    #this follow setting should match with the one in training
     N_TIME_STEPS : 10
     step : 1
     num_equipment : 11
     n_classes : 7
     
   comparison : 
+    #path of input file and output file
     input_file : ../dataset/activity_recognition/test.csv
     res_dir : ../results/AR_prediction_result/comparison
+    
+    #saved model you use for comparison
     trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
+    
+    #this follow setting should match with the one in training
     N_TIME_STEPS : 10
     step : 1
     num_equipment : 11
