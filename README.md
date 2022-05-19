@@ -25,7 +25,10 @@
 ## Getting Started
 
 follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
+
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
+(https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
 
 ### Installation
 
