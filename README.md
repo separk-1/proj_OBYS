@@ -25,6 +25,8 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
+follow README.ipynb
+
 ### Installation
 
 1. Clone the repo
