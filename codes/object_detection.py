@@ -184,7 +184,7 @@ if args.mode == 'training':
     command1 += ' --epochs '
     command1 += epochs
     command1 += ' --data ' 
-    command1 += data
+    command1 += myyaml
     command1 += ' --weights '
     command1 += pre_weights
     command1 += ' --name '
