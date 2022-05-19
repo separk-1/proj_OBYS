@@ -30,14 +30,11 @@ class FrameExtraction:
             fps = vidcap.get(cv2.CAP_PROP_FPS)
             count_zero = str(count).zfill(5)
             ret, image = vidcap.read()
-            # 이미지 사이즈 960x540으로 변경
-            # image = cv2.resize(image, (960, 540))
             if count == math.floor(vidcap.get(cv2.CAP_PROP_FRAME_COUNT) / fps_int):
                 break
             else:
                 if (int(vidcap.get(1)) % fps_int == 0):
                     print('Saved frame number : ' + str(int(vidcap.get(1))))
-                    # 추출된 이미지가 저장되는 경로
                     cv2.imwrite(save_imgpath + "/%s.png" % count_zero, image)
                     # print('Saved frame%s.png' % count)
                     count += 1
@@ -56,7 +53,6 @@ class FrameExtraction:
 
         img_array = []
         size = (0, 0)
-        # for filename in glob.glob('/home/obayashi/data/first_video/test/cut_frame/*.png'):
 
         for filename in file_list_py:
             img = cv2.imread(self.ext_imgpath + filename)
@@ -120,7 +116,7 @@ class Foldering:
         dst_val = self.my_dir + "case_data/%s/val" % (self.case_name)
 
         if os.path.exists(self.my_dir + "0.raw_data/" + self.case_name):
-            print("%s 폴더가 이미 존재합니다. case_name을 변경하거나 기존 폴더(%s)를 삭제해 주세요." % (self.case_name, self.case_name))
+            print("%s folder already exists. Change case_name or delete existing folder(%s)." % (self.case_name, self.case_name))
 
         else:
             for i in range(len(self.train_dir)):
@@ -128,14 +124,14 @@ class Foldering:
                     copy_tree(self.my_dir + "raw_data/%s/images/" % (self.train_dir[i]), dst_train + "/images/")
                     copy_tree(self.my_dir + "raw_data/%s/labels/" % (self.train_dir[i]), dst_train + "/labels/")
                 except distutils.errors.DistutilsError:
-                    print("%s의 input train list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.train_dir[i]))
+                    print("%s does not exist in %s input train list. Exclude and upload.." % (self.train_dir[i]), self.case_name)
 
             for j in range(len(self.val_dir)):
                 try:
                     copy_tree(self.my_dir + "raw_data/%s/images/" % (self.val_dir[j]), dst_val + "/images/")
                     copy_tree(self.my_dir + "raw_data/%s/labels/" % (self.val_dir[j]), dst_val + "/labels/")
                 except distutils.errors.DistutilsError:
-                    print("%s의 input val list에 %s이 존재하지 않습니다. 제외하고 업로드합니다." % (self.case_name, self.val_dir[j]))
+                    print("%s does not exist in %s input validation list. Exclude and upload.." % (self.val_dir[i]), self.case_name)
 
             data = {
                 'train': "%scase_data/%s/train" % (self.my_dir, self.case_name),
@@ -147,7 +143,7 @@ class Foldering:
             yaml.dump(data, file, default_flow_style=None )
             file.close()
 
-            print("%s 업로드 완료" % (self.case_name))
+            print("**%s uploaded**" % (self.case_name))
         return
 
 
@@ -187,7 +183,6 @@ class Foldering_Random:
         data["labelcount"] = label_count
         return data
 
-    # case folder, threshold를 받아 새로운 folder생성
     def Random_df(self):
         global dict
         origin_df = Foldering_Random.origin_df(self)
@@ -275,7 +270,6 @@ class Foldering_Random:
         # shutil.move(self.my_dir+"%s/val"%(self.case_name), self.my_dir + "%s_%s/"%(self.case_name, self.threshold))
         return
 
-    # filename에 해당하는 label list
     @classmethod
     def label_dict(cls, filename):
         f = open(filename, 'r')
@@ -301,7 +295,7 @@ class Foldering_Random:
         return
 
     @classmethod
-    # filename에 해당하는 class count
+    # filename class count
     def count_cls_by_filenamelist(cls, origin_df, filename_list):
         label_list = list()
         for filename in filename_list:
@@ -318,7 +312,7 @@ class Foldering_Random:
         return dict_count
 
     @classmethod
-    # filename에 해당하는 filename_df
+    # filename_df
     def filter_df_by_filenamelist(cls, origin_df, filename_list):
         index_list = list()
         for i in origin_df.index:
