@@ -25,6 +25,7 @@
 ## Getting Started
 
 follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
+<img alt="Python" src ="https://img.shields.io/badge/Python-F9AB00.svg?&style=for-the-badge&logo=Python&logoColor=white"/>
 
 ### Installation
 
