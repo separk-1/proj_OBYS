@@ -179,7 +179,7 @@ if args.mode == 'training':
     save_name= doc[mode]['save_name']
     save_dir=doc[mode]['save_dir']
     
-    command1 = 'CUDA_VISIBLE_DEVICES=0,1 python ./yolov5/train.py --batch '
+    command1 = 'CUDA_VISIBLE_DEVICES=0,1 python ./codes/yolov5/train.py --batch '
     command1 += batch
     command1 += ' --epochs '
     command1 += epochs
