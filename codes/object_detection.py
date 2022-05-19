@@ -9,7 +9,7 @@ import csv
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--mode', default = 'prediction', type=str, required=False)
-parser.add_argument('--data', default = '../config/config.yaml', type=str, required=False,)
+parser.add_argument('--data', default = './config/config.yaml', type=str, required=False,)
 args = parser.parse_args()
 
 #load yaml
