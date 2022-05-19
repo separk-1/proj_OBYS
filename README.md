@@ -25,7 +25,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-follow README.ipynb
+follow [README.ipynb](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
 
 ### Installation
 
