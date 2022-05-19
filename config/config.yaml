@@ -2,8 +2,8 @@ DATAPREPROCESSING:
   Foldering:
     case_name: case_sample
     my_dir: ./dataset/
-    train_dir: cycle1_1,cycle2_1,cycle3_1,cycle4_1
-    val_dir: cycle5_1
+    train_dir: cycle1,cycle2,cycle3,cycle4
+    val_dir: cycle5
   
   Foldering_Random:
     case_name: case_sample
