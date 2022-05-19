@@ -69,8 +69,17 @@ codes/Run_Datapreprocessing.py -m Augmentation
 #### 1) OD_train
 #### 2) OD_predict
 #### 3) AR_train
+* Select mode by parser
+* path: /activity_recognition_train.bat
+```sh
+codes/activity_recognition.py --mode training
+```
 #### 4) AR_predict
-
+* Select mode by parser
+* path: /bin/activity_recognition_prediction.bat
+```sh
+codes/activity_recognition.py --mode predicting
+```
 
 ### 3. Result Analysis
 <p align="right">(<a href="#top">back to top</a>)</p>
