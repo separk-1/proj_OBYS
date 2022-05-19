@@ -1,4 +1,3 @@
-@@ -1,82 +0,0 @@
 <div id="top"></div>
 
 <!-- TABLE OF CONTENTS -->
