@@ -1,5 +1,5 @@
-libgcc_mutex==0.1
-openmp_mutex==4.5
+_libgcc_mutex==0.1
+_openmp_mutex==4.5
 tflow_select==2.3.0
 abseil-cpp==20210324.2
 aiohttp==3.8.1
