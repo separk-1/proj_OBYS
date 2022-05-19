@@ -11,8 +11,6 @@ from codes.functions.DataPreprocessing import FrameExtraction
 from codes.functions.DataPreprocessing import FormatRevision
 from codes.functions import Augmentation
 
-os.chdir("../../../")
-
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--mode', default = 'Foldering', type=str, required=False,
                         help="Set the datapreprocessing mode. Do not forget to configure config.yaml accordingly !")
