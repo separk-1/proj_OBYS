@@ -1,4 +1,4 @@
-python ../codes/result_analysis.py --mode result_analysis
+python ./codes/result_analysis.py --mode result_analysis
 ~
 
 # mode
