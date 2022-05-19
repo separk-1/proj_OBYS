@@ -55,35 +55,36 @@ OBJECT_DETECTION:
 ACTIVITY_RECOGNITION:
   train : 
     input_dir : ../dataset/activity_recognition/sample.csv
+    res_dir : ../weights/AR_train_result
     N_TIME_STEPS : 10
     step : 1
     num_equipment : 11
     n_classes : 7
-    res_dir : ../weights/AR_train_result
     epoch : 100
     
     #sensitivy analysis
     n_hidden : 64
     batch_size : 32
     
-  
+ 
   predict : 
     input_file : ../dataset/activity_recognition/test2.csv
+    res_dir : ../results/AR_prediction_result/prediction.csv
     trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
     N_TIME_STEPS : 10
     step : 1
     num_equipment : 11
     n_classes : 7
-    res_dir : ../results/AR_prediction_result/prediction.csv
     
   comparison : 
     input_file : ../dataset/activity_recognition/test.csv
+    res_dir : ../results/AR_prediction_result/comparison
     trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
     N_TIME_STEPS : 10
     step : 1
     num_equipment : 11
     n_classes : 7
-    res_dir : ../results/AR_prediction_result/comparison
+    
     
 
 RESULT_ANALYSIS:
