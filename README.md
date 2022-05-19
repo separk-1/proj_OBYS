@@ -19,7 +19,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 * Obayashi project code
-* MobaXterm: /home/obayashi/Projects/obayashi_practice/
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
