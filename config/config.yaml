@@ -61,7 +61,6 @@ ACTIVITY_RECOGNITION:
     #set number of equipment being detected and the number of activity class
     num_equipment : 11
     n_classes : 7
-    epoch : 100
     
     #sensitivy analysis
     n_hidden : 64
