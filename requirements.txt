@@ -1,5 +1,8 @@
 PyYAML==5.4.1
 pickle5==0.0.11
+
+
+# YOLOv5 REQUIREMENTS
 # pip install -r requirements.txt
 
 # base ----------------------------------------
