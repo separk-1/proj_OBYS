@@ -1,22 +1,22 @@
 DATAPREPROCESSING:
   Foldering:
     case_name: case_sample
-    my_dir: ./dataset/
+    my_dir: ../dataset/
     train_dir: cycle1,cycle2,cycle3,cycle4
     val_dir: cycle5
   
   Foldering_Random:
     case_name: case_sample
-    my_dir: ./dataset/case_data/
+    my_dir: ../dataset/case_data/
     threshold: 1000
   
   Video_to_frame:
-    input_dir: ./dataset/test_data/cycle2.mp4
-    output_dir: ./dataset/test_data/
+    input_dir: ../dataset/test_data/cycle2.mp4
+    output_dir: ../dataset/test_data/
   
   Frame_to_video:
-    input_dir: ./dataset/test_data/resized_XX/
-    output_dir: ./dataset/test_data/XX.mp4
+    input_dir: ../dataset/test_data/resized_XX/
+    output_dir: ../dataset/test_data/XX.mp4
   
   FormatRevision:
     label_list: os.listdir("**dir")
