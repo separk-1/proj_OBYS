@@ -28,19 +28,18 @@ DATAPREPROCESSING:
     size : 4
 
 
-
 OBJECT_DETECTION:
   training:
     batch : '4'
     epochs : '10'
-    traindata : '../case_data/case_sample_1000/case_sample_1000.yaml'
-    pre_weights : '../weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
-    save_name : 'case_sample_1000'
-    save_dir : '../weights/OD_train_result/'
+    traindata : './dataset/case_data/case_sample/case_sample.yaml'
+    pre_weights : './weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
+    save_name : 'case_sample'
+    save_dir : './weights/OD_train_result/'
 
   prediction:
     file_name: 'cycle2.mp4'
-    detect_model: './yolov5/detect_Draw_Line.py'
+    detect_model: '../codes/yolov5/detect_Draw_Line.py'
     source: '../dataset/test_data/'
     weights: '../weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
     conf: '0.25'
@@ -54,55 +53,41 @@ OBJECT_DETECTION:
 
 ACTIVITY_RECOGNITION:
   train : 
-    #path of input file and output file
     input_dir : ../dataset/activity_recognition/sample.csv
-    res_dir : ../weights/AR_train_result
-   
-    #set number of equipment being detected and the number of activity class
+    N_TIME_STEPS : 10
+    step : 1
     num_equipment : 11
     n_classes : 7
+    res_dir : ../weights/AR_train_result
+    epoch : 100
     
     #sensitivy analysis
     n_hidden : 64
     batch_size : 32
-    N_TIME_STEPS : 10
-    step : 1
-    epoch : 100
- 
- 
+    
+  
   predict : 
-    #path of input file and output file
-    input_file : ../dataset/activity_recognition/test2.csv
-    res_dir : ../results/AR_prediction_result/prediction.csv
-    
-    #saved model you use for prediction
+    input_file: ../results/OD_predict_result/cycle2/cycle2_xy_mod.csv
     trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
-    
-    #this follow setting should match with the one in training
     N_TIME_STEPS : 10
     step : 1
     num_equipment : 11
     n_classes : 7
+    res_dir : ../results/AR_prediction_result
     
   comparison : 
-    #path of input file and output file
     input_file : ../dataset/activity_recognition/test.csv
-    res_dir : ../results/AR_prediction_result/comparison
-    
-    #saved model you use for comparison
     trained_model : ../weights/AR_train_result/sample_lstm_epoch1_timestep10.h5
-    
-    #this follow setting should match with the one in training
     N_TIME_STEPS : 10
     step : 1
     num_equipment : 11
     n_classes : 7
-    
+    res_dir : ../results/AR_prediction_result/comparison
     
 
 RESULT_ANALYSIS:
   time_table:
-    input_ID_data: './cycle2_ID_mod_act.csv'
+    input_ID_data: '../cycle2_ID_mod_act.csv'
     time_table_output_dir: './result_analysis_result/time_table'
     time_interval: 60 #sec  
       
@@ -131,6 +116,4 @@ RESULT_ANALYSIS:
     dumptruck_counting_data: './result_analysis_result/counting_equipment/dumptruck_counting.csv'
     time_interval: 60 #sec  
     activity_class: ["Drilling&Loading", "Mucking", "Scaling", "Spraying", "H_beam", "Rock_bolting", "nothing"]
-
-
 
