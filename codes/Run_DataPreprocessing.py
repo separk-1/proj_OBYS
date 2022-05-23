@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--mode', default = 'Foldering', type=str, required=False,
                         help="Set the datapreprocessing mode. Do not forget to configure config.yaml accordingly !")
 
-with open('./config/config.yaml') as f:
+with open('../config/config.yaml') as f:
     try:
       doc = yaml.load(f, Loader=yaml.FullLoader)
       args = parser.parse_args()
