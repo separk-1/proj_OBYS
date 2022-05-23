@@ -10,7 +10,7 @@ natsort==7.1.1
 pickle5
 #pillow
 #plotly
-#pyyaml
+pyyaml
 #requests
 scikit-image==0.19.2
 scikit-learn==1.0.1
