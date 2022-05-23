@@ -186,7 +186,7 @@ def counting_payloader(input_data, dumptruck_counting_data, output_dir):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--mode', default = 'result_analysis', type=str, required=False)
-parser.add_argument('--data', default = './config/config.yaml', type=str, required=False,)
+parser.add_argument('--data', default = '../config/config.yaml', type=str, required=False,)
 args = parser.parse_args()
 
 #load yaml

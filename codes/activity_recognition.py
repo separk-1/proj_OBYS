@@ -161,6 +161,7 @@ if args.mode =='predicting':
     n_classes = int(doc['predict']['n_classes'])
     res_dir = doc['predict']['res_dir']
     input_file = doc['predict']['input_file']
+    input_file_name = input_file.split('/')[-1]
     trained_model = doc['predict']['trained_model']
     
     N_FEATURES = 2*num_equipment
@@ -183,18 +184,40 @@ if args.mode =='predicting':
         pred_class_index = i.index(max(i))
         label_list = ['A','B','C','D','E','F','I']
         Predict_class.append(label_list[pred_class_index]) #predict_class
-        
+    print(columns)
+    
+    Dict = {}
+    df_for_name = pd.read_csv(input_file)  #for getting the column name
+    new_column = []
+    for col in df_for_name.columns:
+        new_column.append(col)
+    print(new_column)
+    for i in range(len(columns)):
+        Dict[columns[i]] = new_column[i]
+    
+    
     df = pd.read_csv(input_file, skiprows = [0], names = columns)
     df.drop(df.columns[[0]], axis=1, inplace=True)
-    print(df)
     last_class = Predict_class[-1]
     i = 0
     for i in range(N_TIME_STEPS+1):
         Predict_class.append(last_class)
-        i +=1
-    print(df)    
+        i +=1    
     df['predict_class'] = Predict_class
-    df.to_csv(res_dir)
+    res_file_xy = res_dir + '/' + '{}'.format(input_file_name)
+    df.rename(columns = Dict, inplace=True)
+    df.to_csv(res_file_xy)
+    
+    ###read ID file ###
+    input_file_name_ID = input_file_name.replace('xy_mod','ID')
+    input_ID_file = input_file.replace('xy_mod','ID')
+    #print(input_ID_file)
+    df_ID = pd.read_csv(input_ID_file, index_col=0)
+    print(len(Predict_class))
+    df_ID['predict_class'] = Predict_class
+    res_file_ID = res_dir + '/' + '{}'.format(input_file_name_ID)
+    df_ID.to_csv(res_file_ID)
+        
 
 
 if args.mode =='comparison':

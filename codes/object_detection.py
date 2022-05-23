@@ -6,10 +6,9 @@ import numpy as np
 import pickle5 as pickle
 import csv
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--mode', default = 'prediction', type=str, required=False)
-parser.add_argument('--data', default = './config/config.yaml', type=str, required=False,)
+parser.add_argument('--data', default = '../config/config.yaml', type=str, required=False,)
 args = parser.parse_args()
 
 #load yaml
@@ -171,6 +170,7 @@ def xy_mod(xy_csv_file, file_name, path, save_dir):
 
 
 if args.mode == 'training':
+    os.chdir("../")
     mode = 'training'
     batch= doc[mode]['batch']
     epochs= doc[mode]['epochs']
@@ -179,19 +179,18 @@ if args.mode == 'training':
     save_name= doc[mode]['save_name']
     save_dir=doc[mode]['save_dir']
     
-    command1 = 'CUDA_VISIBLE_DEVICES=0,1 python ./codes/yolov5/train.py --batch '
+    command1 = 'python ./codes/yolov5/train.py --batch '
     command1 += batch
     command1 += ' --epochs '
     command1 += epochs
     command1 += ' --data ' 
-    command1 += myyaml
+    command1 += traindata
     command1 += ' --weights '
     command1 += pre_weights
     command1 += ' --name '
     command1 += save_name
     command1 += ' --project '
     command1 += save_dir
-    
     os.system(command1)
 
 elif args.mode == 'prediction':
