@@ -27,7 +27,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("--mode", default = 'training', type=str, required=False,
                         help="Set the training mode. Do not forget to configure config.py accordingly !")
-parser.add_argument("--data", default = "/home/obayashi/Projects/obayashi_practice/config/config.yaml", type=str, required=False,
+parser.add_argument("--data", default = "../config/config.yaml", type=str, required=False,
                         help="Set the training mode. Do not forget to configure config.py accordingly !")                        
 args = parser.parse_args()
 
