@@ -31,26 +31,24 @@ follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/separk-1/proj_OBYS/blob/main/README.ipynb)
 
-### Installation
+### 1. Installation
 
-1. Clone the repo
+#### 1) Clone the repo
    ```sh
    git clone https://github.com/separk-1/proj_OBSYS.git
    ```
-2. Install packages
+#### 2) Install packages
    ```sh
    pip install -r requirements.txt  
    ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- PROCESS -->
-### 1. Set Config
+   
+### 2. Process
+#### 1) Set Config
 * set path & parameter
 path: /config/config.yaml
 
 
-#### 2. Run by .bat(or .sh)
+#### 2) Run by .bat(or .sh)
 * Select mode by parser
 * path: /bin/.bat(or .sh)
 
@@ -142,16 +140,39 @@ python object_detection.py -mode postprocessing
 python activity_recognition.py -mode training
 ```
 
-#### 1) mode: Training
-* Input file : Csv format file for training
+#### 2) mode: Predicting
+* Input file : Csv format file, Pre-trained model(weights)
 * Setting condition : step size, hidden layer, batch size, epoch
-* Output file : Trained model(weights)
+* Output file : Csv format file with prediction
 ```sh
-python activity_recognition.py -mode training
+python activity_recognition.py -mode predicting
 ```
 
 
-### 3. Result Analysis
+### 4. Result Analysis
+#### 1) mode: Time Table
+* Input file : Activity predicted ID file
+* Setting condition : time interval
+* Output file : Time Table(Activity & Equipment)
+```sh
+python python result_analysis.py --mode time_table
+```
+
+#### 2) mode: Cycle Time
+* Input file : Activity predicted ID file
+* Setting condition : Activity Classes
+* Output file : Activity Cycle Time
+```sh
+python python result_analysis.py --mode cycle_time
+```
+
+#### 3) mode: counting dump_truck and payloader 
+* Input file : Activity predicted ID and Coordinate file
+* Output file : Number of countings 
+```sh
+python result_analysis.py --mode counying_dumptruck 
+```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
