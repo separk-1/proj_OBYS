@@ -9,6 +9,8 @@
     <li>
       <a href="#getting-started">Getting Started</a></li>
     <li>
+      <a href="#process">Usage</a></li>
+    <li>
       <a href="#usage">Usage</a></li>
     <li>
       <a href="#architecture">Architecture</a></li>
@@ -42,6 +44,19 @@ follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- PROCESS -->
+### 1. Set Config
+* set path & parameter
+path: /config/config.yaml
+
+
+#### 2. Run by .bat(or .sh)
+* Select mode by parser
+* path: /bin/.bat(or .sh)
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 ### 0. Dataset
@@ -52,37 +67,89 @@ follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
 * test_data
 * activity_recognition
 
+
 ### 1. DataPreprocessing
-#### 1) Set config
-* Set parameter for running
-* path: /config/config.yaml
-#### 2) DataPreprocessing
-* Select mode by parser
-* path: /bin/DataPreprocessing.bat
+#### 1) mode: Video to Frame
+* Input file: Original video
+* Output file: Images by Frame
 ```sh
-codes/Run_Datapreprocessing.py -m Foldering
-codes/Run_Datapreprocessing.py -m Foldering_Random
-codes/Run_Datapreprocessing.py -m Video_to_frame
-codes/Run_Datapreprocessing.py -m Frame_to_video
-codes/Run_Datapreprocessing.py -m FormatRevision
-codes/Run_Datapreprocessing.py -m Augmentation
+python Run_Datapreprocessing.py -mode Video_to_frame
 ```
 
-### 2. Train & Predict
-#### 1) OD_train
-#### 2) OD_predict
-#### 3) AR_train
-* Select mode by parser
-* path: /activity_recognition_train.bat
+
+#### 2) mode: Frame to Video
+* Input file: Images by Frame
+* Output file: Converted Video
 ```sh
-codes/activity_recognition.py --mode training
+python Run_Datapreprocessing.py -mode Frame_to_video
 ```
-#### 4) AR_predict
-* Select mode by parser
-* path: /bin/activity_recognition_prediction.bat
+
+
+#### 3) mode: Format Revision
+* Input file: Original labels, images set
+* Output file: Overlap files removed
 ```sh
-codes/activity_recognition.py --mode predicting
+python Run_Datapreprocessing.py -mode FormatRevision
 ```
+
+
+#### 4) mode: Foldering
+* Input file: labeled train/validation dataset
+* Output file: Foldered dataset
+```sh
+python Run_Datapreprocessing.py -mode Foldering
+```
+
+
+#### 5) mode: Foldering Random
+* Input file: foldered dataset
+* Output file: evenly distributed dataset
+```sh
+python Run_Datapreprocessing.py -mode Foldering_Random
+```
+
+
+### 2. Object Detection
+#### 1) mode: Training
+* Input file : Train dataset , Pre-trained model(weights)
+* Setting condition : batch size, epoch
+* Output file : Custom trained model(weights)
+```sh
+python object_detection.py -mode training
+```
+
+#### 2) mode: Prediction
+* Input file : Test video, Custom pre-trained model(weights)
+* Setting condition : confidence threshold
+* Output file : prediction result(pkl file)
+```sh
+python object_detection.py -mode prediction
+```
+
+#### 3) mode: Postprocessing
+* Input file : Prediction result(pkl file)
+* Output file : Revised prediction result(ID and Coordinate csv files)
+```sh
+python object_detection.py -mode postprocessing
+```
+
+### 3. Activity Recognition
+#### 1) mode: Training
+* Input file : Csv format file for training
+* Setting condition : step size, hidden layer, batch size, epoch
+* Output file : Trained model(weights)
+```sh
+python activity_recognition.py -mode training
+```
+
+#### 1) mode: Training
+* Input file : Csv format file for training
+* Setting condition : step size, hidden layer, batch size, epoch
+* Output file : Trained model(weights)
+```sh
+python activity_recognition.py -mode training
+```
+
 
 ### 3. Result Analysis
 <p align="right">(<a href="#top">back to top</a>)</p>
