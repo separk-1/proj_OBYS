@@ -134,8 +134,8 @@ class Foldering:
                     print("%s does not exist in %s input validation list. Exclude and upload.." % (self.val_dir[i]), self.case_name)
 
             data = {
-                'train': "/content/proj_OBYS%scase_data/%s/train" % (self.my_dir, self.case_name),
-                'val': "/content/proj_OBYS%scase_data/%s/val" % (self.my_dir, self.case_name),
+                'train': "/content/proj_OBYS/dataset/case_data/%s/train" % (self.case_name),
+                'val': "/content/proj_OBYS/dataset/case_data/%s/val" % (self.case_name),
                 'nc': 11,
                 'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\", \"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
         }
