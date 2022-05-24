@@ -134,11 +134,11 @@ class Foldering:
                     print("%s does not exist in %s input validation list. Exclude and upload.." % (self.val_dir[i]), self.case_name)
 
             data = {
-                'train': "%scase_data/%s/train" % (self.my_dir, self.case_name),
-                'val': "%scase_data/%s/val" % (self.my_dir, self.case_name),
+                'train': "/content/proj_OBYS%scase_data/%s/train" % (self.my_dir, self.case_name),
+                'val': "/content/proj_OBYS%scase_data/%s/val" % (self.my_dir, self.case_name),
                 'nc': 11,
-                'names': ["drill_jumbo", "gunpowder_carrier", "work platform", "breaker", "excavator", "payloader", "dump_truck", "sprayer", "h_beam_holder", "mixer_truck", "mortar_trolley_truck"]
-            }
+                'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\", \"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
+        }
             file = open("%scase_data/%s/%s.yaml" % (self.my_dir, self.case_name, self.case_name), "w")
             yaml.dump(data, file, default_flow_style=None )
             file.close()
@@ -227,8 +227,8 @@ class Foldering_Random:
     # create yaml file
     def create_yaml(self):
         data = {
-            'train': "%s%s_%s/train" % (self.my_dir, self.case_name, self.threshold),
-            'val': "%s%s/val" % (self.my_dir, self.case_name),
+            'train': "/content/proj_OBYS%s%s_%s/train" % (self.my_dir, self.case_name, self.threshold),
+            'val': "/content/proj_OBYS%s%s/val" % (self.my_dir, self.case_name),
             'nc': 11,
             'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\", \"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
         }
