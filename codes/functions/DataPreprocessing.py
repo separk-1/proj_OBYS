@@ -138,7 +138,7 @@ class Foldering:
                 'val': "/content/proj_OBYS/dataset/case_data/%s/val" % (self.case_name),
                 'nc': 11,
                 'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\", \"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
-        }
+            }
             file = open("%scase_data/%s/%s.yaml" % (self.my_dir, self.case_name, self.case_name), "w")
             yaml.dump(data, file, default_flow_style=None )
             file.close()
