@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 
+
+
 def createFolder(directory):
   try:
     if not os.path.exists(directory):
@@ -25,19 +27,19 @@ def df_rolling_and_T(df, time):
 
 def making_timetable(input_dir, output_dir, interval):
   df = pd.read_csv(input_dir, index_col = 0)
-  df_A = pd.DataFrame(df['activity'])
-  df.drop(['activity'], axis = 1, inplace = True)
+  df_A = pd.DataFrame(df['predict_class'])
+  df.drop(['predict_class'], axis = 1, inplace = True)
 
-  columns = sorted(df_A['activity'].unique())
+  columns = sorted(df_A['predict_class'].unique())
   for col in columns:
     col_list = list()
     for i in df_A.index:
-      if df_A.at[i, 'activity'] == col:
+      if df_A.at[i, 'predict_class'] == col:
         col_list.append(1)
       else:
         col_list.append(0)
     df_A[col] = col_list
-  df_A.drop(['activity'], axis = 1, inplace = True)
+  df_A.drop(['predict_class'], axis = 1, inplace = True)
 
   df_rolling_and_T(df, interval).to_csv(output_dir+'/timetable_equip_'+str(interval)+'.csv')
   df_rolling_and_T(df_A, interval).to_csv(output_dir+'/timetable_activity_'+str(interval)+'.csv')
@@ -51,10 +53,10 @@ def time_of_activity(input_data, output_dir, act_class):
     num_class = len(act_class)
     start = ord('A')
     for i in range(num_class):
-        df.loc[df['activity']== chr(start),'activity'] = act_class[i]
+        df.loc[df['predict_class']== chr(start),'predict_class'] = act_class[i]
         start+=1
 
-    activity_column = df['activity'].tolist()
+    activity_column = df['predict_class'].tolist()
     act_time_list=[]
 
     for actclass in act_class:
@@ -165,19 +167,26 @@ def counting_payloader(input_data, dumptruck_counting_data, output_dir):
     plt.grid()
     plt.tight_layout()
 
-    result = []
-    for time in dumptruck_time_list:
-        df3 = df2.iloc[time[0]:time[1], :]
 
+    result =[]
+    for time in dumptruck_time_list:
+        df3=df2.iloc[time[0]:time[1],:]
+    
         payloader = df3['payloader_cy']
         dumptruck = df3['dump_truck_cy']
-
+        #distance = df['distance']
+    
         peaks, properties = find_peaks(payloader, height=450, distance=10)
-        peak_list = list(time[0] + peaks)
+        #peaks, properties = find_peaks(payloader, height=550, distance=10)
+        #print(f'Index of each peaks : {time[0]+peaks}')
+        #print(f'Heigth of each peaks  : {properties["peak_heights"]}')
+        peak_list = list(time[0]+peaks)
         result.extend(peak_list)
-        plt.plot(payloader, color='b')
-        plt.plot(time[0] + peaks, payloader[time[0] + peaks], 'x', color='r')
-        plt.plot(dumptruck, color='g')
+    
+        plt.plot(payloader, color="b")
+        plt.plot(time[0]+peaks, payloader[time[0]+peaks], "x", color="r")
+        #plt.plot(distance)
+        plt.plot(dumptruck, color="g")
 
     plt.savefig(output_dir+'/counting_payloader.jpg', facecolor='#eeeeee')
     time_df = pd.DataFrame(result, columns=['PeakTime'])

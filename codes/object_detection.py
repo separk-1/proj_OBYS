@@ -196,7 +196,6 @@ if args.mode == 'training':
 elif args.mode == 'prediction':
     mode = 'prediction'
     file_name= doc[mode]['file_name']
-    detect_model= doc[mode]['detect_model']
     source=doc[mode]['source'] + file_name
     weights= doc[mode]['weights']
     conf= doc[mode]['conf']
@@ -204,8 +203,7 @@ elif args.mode == 'prediction':
     save_name=file_name[:-4]
     
    
-    command1 = 'CUDA_VISIBLE_DEVICES=0,1 python '
-    command1 += detect_model
+    command1 = 'CUDA_VISIBLE_DEVICES=0,1 python ../codes/yolov5/detect_Draw_Line.py'
     command1 += ' --source '
     command1 += source
     command1 += ' --weights '
@@ -227,8 +225,8 @@ elif args.mode == 'postprocessing':
     path= doc[mode]['path']
     file_name= doc[mode]['file_name']
     save_dir= doc[mode]['save_dir']
-    video_name = file_name.split('.')[0]
-    
+    video_name = file_name
+        
     pkl_to_csv_ID(video_name, path, save_dir)
     pkl_to_csv_xy(video_name, path, save_dir)
     

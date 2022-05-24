@@ -173,7 +173,9 @@ if args.mode =='predicting':
     for equip in range(num_equipment):
         columns.append('e{}x'.format(str(equip+1)))
         columns.append('e{}y'.format(str(equip+1)))
+    
     df = pd.read_csv(input_file, skiprows = [0], names = columns,index_col='time')
+    
     X_test = load_data_without_gt(df, columns, N_TIME_STEPS, num_equipment,step)
     
     #output_1: comparison_table 
@@ -184,14 +186,13 @@ if args.mode =='predicting':
         pred_class_index = i.index(max(i))
         label_list = ['A','B','C','D','E','F','I']
         Predict_class.append(label_list[pred_class_index]) #predict_class
-    print(columns)
     
     Dict = {}
     df_for_name = pd.read_csv(input_file)  #for getting the column name
     new_column = []
     for col in df_for_name.columns:
         new_column.append(col)
-    print(new_column)
+    
     for i in range(len(columns)):
         Dict[columns[i]] = new_column[i]
     
@@ -213,7 +214,7 @@ if args.mode =='predicting':
     input_ID_file = input_file.replace('xy_mod','ID')
     #print(input_ID_file)
     df_ID = pd.read_csv(input_ID_file, index_col=0)
-    print(len(Predict_class))
+    
     df_ID['predict_class'] = Predict_class
     res_file_ID = res_dir + '/' + '{}'.format(input_file_name_ID)
     df_ID.to_csv(res_file_ID)
