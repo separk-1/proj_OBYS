@@ -28,26 +28,34 @@ DATAPREPROCESSING:
     size : 4
 
 
+
 OBJECT_DETECTION:
   training:
-    batch : '4'
-    epochs : '10'
-    traindata : '/content/proj_OBYS/dataset/case_data/case_sample/case_sample.yaml'
-    pre_weights : '/content/proj_OBYS/weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
+    #Set Input file & Output file directory path
+    traindata : './dataset/case_data/case_sample/case_sample.yaml'
+    pre_weights : './weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
     save_name : 'case_sample'
     save_dir : './weights/OD_train_result/'
+    
+    #set training condition
+    batch : '4'
+    epochs : '10'
 
   prediction:
+    #Set Input file & Output file directory path
     file_name: 'cycle2.mp4'
     detect_model: '../codes/yolov5/detect_Draw_Line.py'
     source: '../dataset/test_data/'
     weights: '../weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
-    conf: '0.25'
     save_dir: '../results/OD_predict_result/'
-          
+    
+    #set prediction condition
+    conf: '0.25'
+    
   postprocessing:
+    #Set Input file & Output file directory path
+    file_name: 'cycle2'
     path: '../results/OD_predict_result/cycle2/'
-    file_name: 'cycle2.pkl'
     save_dir: '../results/OD_predict_result/cycle2/'
 
 
@@ -115,5 +123,6 @@ RESULT_ANALYSIS:
     dumptruck_counting_data: '../results/result_analysis_result/counting_equipment/dumptruck_counting.csv'
     time_interval: 60 #sec  
     activity_class: ["Drilling&Loading", "Mucking", "Scaling", "Spraying", "H_beam", "Rock_bolting", "nothing"]
+
 
 
