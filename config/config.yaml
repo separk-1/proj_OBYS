@@ -32,8 +32,8 @@ OBJECT_DETECTION:
   training:
     batch : '4'
     epochs : '10'
-    traindata : './dataset/case_data/case_sample/case_sample.yaml'
-    pre_weights : './weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
+    traindata : '/content/proj_OBYS/dataset/case_data/case_sample/case_sample.yaml'
+    pre_weights : '/content/proj_OBYS/weights/OD_train_result/result_1121_epoch100_30/weights/best.pt'
     save_name : 'case_sample'
     save_dir : './weights/OD_train_result/'
 
