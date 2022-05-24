@@ -63,6 +63,8 @@ follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
 
 
 ### 1. DataPreprocessing
+![image](https://user-images.githubusercontent.com/78338116/169981862-a3522550-af7d-41e6-9f83-af72704fb28a.png)
+
 #### 1) mode: Video to Frame
 * Input file: Original video
 * Output file: Images by Frame
@@ -104,6 +106,8 @@ python Run_Datapreprocessing.py -mode Foldering_Random
 
 
 ### 2. Object Detection
+![image](https://user-images.githubusercontent.com/78338116/169981910-7b09f5c7-c5b0-48ab-a71a-4c0a5371b611.png)
+
 #### 1) mode: Training
 * Input file : Train dataset , Pre-trained model(weights)
 * Setting condition : batch size, epoch
@@ -128,6 +132,8 @@ python object_detection.py -mode postprocessing
 ```
 
 ### 3. Activity Recognition
+![image](https://user-images.githubusercontent.com/78338116/169981947-8537b5d6-8c74-4234-ba6d-228437abff1e.png)
+
 #### 1) mode: Training
 * Input file : Csv format file for training
 * Setting condition : step size, hidden layer, batch size, epoch
@@ -146,6 +152,8 @@ python activity_recognition.py -mode predicting
 
 
 ### 4. Result Analysis
+![image](https://user-images.githubusercontent.com/78338116/169981993-83977b79-ed84-4b6d-bfe3-a5736d8a9464.png)
+
 #### 1) mode: Time Table
 * Input file : Activity predicted ID file
 * Setting condition : time interval
