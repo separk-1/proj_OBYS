@@ -43,14 +43,10 @@ follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
    ```
    
 ### 2. Process
-#### 1) Set Config
-* set path & parameter
-path: /config/config.yaml
-
-
-#### 2) Run by .bat(or .sh)
-* Select mode by parser
-* path: /bin/.bat(or .sh)
+#### Yaml file and Execution file
+* Since the file path or variables are defined in the yaml file, you need to set the variables when you use the system.
+* You can choose the mode for each system through execution bin file.
+![image](https://user-images.githubusercontent.com/78338116/169981538-20e70d37-3658-4285-8fb9-2ff38951d978.png)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
