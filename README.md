@@ -131,7 +131,7 @@ python object_detection.py -mode postprocessing
 ```
 
 ### 3. Activity Recognition
-<p align="center"><img src="https://user-images.githubusercontent.com/78338116/169981947-8537b5d6-8c74-4234-ba6d-228437abff1e.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/78338116/169982167-6671f569-aa8f-44a7-a4c1-dac731f1302b.png"></p>
 
 #### 1) mode: Training
 * Input file : Csv format file for training
@@ -151,7 +151,7 @@ python activity_recognition.py -mode predicting
 
 
 ### 4. Result Analysis
-<p align="center"><img src="https://user-images.githubusercontent.com/78338116/169982167-6671f569-aa8f-44a7-a4c1-dac731f1302b.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/78338116/169982951-041f05da-8a24-4a8f-a006-3a5e3387c04f.png"></p>
 
 #### 1) mode: Time Table
 * Input file : Activity predicted ID file
