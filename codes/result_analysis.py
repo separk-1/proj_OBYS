@@ -44,6 +44,8 @@ def making_timetable(input_dir, output_dir, interval):
   df_rolling_and_T(df, interval).to_csv(output_dir+'/timetable_equip_'+str(interval)+'.csv')
   df_rolling_and_T(df_A, interval).to_csv(output_dir+'/timetable_activity_'+str(interval)+'.csv')
 
+  return df_rolling_and_T(df, interval).head(), df_rolling_and_T(df_A, interval).head()
+
 
 #cycle time of each activity
 def time_of_activity(input_data, output_dir, act_class):
@@ -89,6 +91,7 @@ def time_of_activity(input_data, output_dir, act_class):
     act_time_df.sort_values(by=['start_time'], axis=0, inplace = True)
     act_time_df.reset_index(drop = True, inplace = True)
     act_time_df.to_csv(output_dir+'/act_time.csv')
+    return act_time_df
 
 #counting_dumptruck
 def counting_dumptruck(input_data, cycle_time_data, output_dir):
@@ -143,6 +146,9 @@ def counting_dumptruck(input_data, cycle_time_data, output_dir):
     time_df.sort_values(by=['InTime'], axis=0, inplace=True)
     time_df.reset_index(drop=True, inplace=True)
     time_df.to_csv(output_dir+'/dumptruck_counting.csv')
+    print("Dumptruck Counting :",count)
+
+    return time_df
 
 def counting_payloader(input_data, dumptruck_counting_data, output_dir):
     df = pd.read_csv(input_data)
@@ -169,6 +175,7 @@ def counting_payloader(input_data, dumptruck_counting_data, output_dir):
 
 
     result =[]
+    count=0
     for time in dumptruck_time_list:
         df3=df2.iloc[time[0]:time[1],:]
     
@@ -187,10 +194,15 @@ def counting_payloader(input_data, dumptruck_counting_data, output_dir):
         plt.plot(time[0]+peaks, payloader[time[0]+peaks], "x", color="r")
         #plt.plot(distance)
         plt.plot(dumptruck, color="g")
+        count +=len(peaks)
+        
 
     plt.savefig(output_dir+'/counting_payloader.jpg', facecolor='#eeeeee')
     time_df = pd.DataFrame(result, columns=['PeakTime'])
     time_df.to_csv(output_dir+'/payloader_counting.csv')
+
+    print("Payloader Counting :",count)
+    plt.show()
 
 
 parser = argparse.ArgumentParser()
@@ -211,16 +223,17 @@ if args.mode == 'time_table':
     time_table_output_dir= doc[mode]['time_table_output_dir']
     time_interval=doc[mode]['time_interval']
     createFolder(time_table_output_dir)
-    making_timetable(input_ID_data, time_table_output_dir, time_interval)
+    Equipment_timetable, Activity_timetable = making_timetable(input_ID_data, time_table_output_dir, time_interval)
+    
 
-#activity_cylce_time
+#activity_cycle_time
 elif args.mode == 'activity_cycle_time':
     mode = 'activity_cycle_time'
     input_ID_data = doc[mode]['input_ID_data']
     cycle_time_output_dir = doc[mode]['cycle_time_output_dir']
     activity_class = doc[mode]['activity_class']
     createFolder(cycle_time_output_dir)
-    time_of_activity(input_ID_data, cycle_time_output_dir, activity_class)
+    activity_cycle_time = time_of_activity(input_ID_data, cycle_time_output_dir, activity_class)
 
 #counting_dumptruck
 elif args.mode == 'counting_dumptruck':
@@ -229,7 +242,7 @@ elif args.mode == 'counting_dumptruck':
     cycle_time_data = doc[mode]['cycle_time_data']
     counting_output_dir = doc[mode]['counting_output_dir']
     createFolder(counting_output_dir)
-    counting_dumptruck(input_ID_data, cycle_time_data, counting_output_dir)
+    dumptruck_counting=counting_dumptruck(input_ID_data, cycle_time_data, counting_output_dir)
 
 #counting_payloader
 elif args.mode == 'counting_payloader':
