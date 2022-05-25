@@ -140,7 +140,7 @@ class Foldering:
                 'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\", \"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
             }
             file = open("%scase_data/%s/%s.yaml" % (self.my_dir, self.case_name, self.case_name), "w")
-            yaml.dump(data, file, default_flow_style=True )
+            yaml.dump(data, file, default_flow_style=False )
             file.close()
 
             print("**%s uploaded**" % (self.case_name))
@@ -233,7 +233,7 @@ class Foldering_Random:
             'names': "[\"drill_jumbo\", \"gunpowder_carrier\", \"work platform\", \"breaker\", \"excavator\", \"payloader\", \"dump_truck\", \"sprayer\", \"h_beam_holder\", \"mixer_truck\", \"mortar_trolley_truck\"]"
         }
         file = open("%s%s_%s/%s_%s.yaml" % (self.my_dir, self.case_name, self.threshold, self.case_name, self.threshold), "w")
-        yaml.dump(data, file,  default_flow_style=True)
+        yaml.dump(data, file,  default_flow_style=False)
         file.close()
         return
 
