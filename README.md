@@ -107,6 +107,8 @@ python Run_Datapreprocessing.py -mode Foldering_Random
 
 ### 2. Object Detection
 <p align="center"><img src="https://user-images.githubusercontent.com/78338116/169981910-7b09f5c7-c5b0-48ab-a71a-4c0a5371b611.png"></p>
+
+
 #### 1) mode: Training
 * Input file : Train dataset , Pre-trained model(weights)
 * Setting condition : batch size, epoch
