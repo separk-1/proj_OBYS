@@ -69,7 +69,7 @@ follow [README](https://github.com/separk-1/proj_OBYS/blob/main/README.ipynb)
 * Input file: Original video
 * Output file: Images by Frame
 ```sh
-python Run_Datapreprocessing.py -mode Video_to_frame
+python Run_Datapreprocessing.py --mode Video_to_frame
 ```
 
 
@@ -77,7 +77,7 @@ python Run_Datapreprocessing.py -mode Video_to_frame
 * Input file: Images by Frame
 * Output file: Converted Video
 ```sh
-python Run_Datapreprocessing.py -mode Frame_to_video
+python Run_Datapreprocessing.py --mode Frame_to_video
 ```
 
 
@@ -85,7 +85,7 @@ python Run_Datapreprocessing.py -mode Frame_to_video
 * Input file: Original labels, images set
 * Output file: Overlap files removed
 ```sh
-python Run_Datapreprocessing.py -mode FormatRevision
+python Run_Datapreprocessing.py --mode FormatRevision
 ```
 
 
@@ -93,7 +93,7 @@ python Run_Datapreprocessing.py -mode FormatRevision
 * Input file: labeled train/validation dataset
 * Output file: Foldered dataset
 ```sh
-python Run_Datapreprocessing.py -mode Foldering
+python Run_Datapreprocessing.py --mode Foldering
 ```
 
 
@@ -101,7 +101,7 @@ python Run_Datapreprocessing.py -mode Foldering
 * Input file: foldered dataset
 * Output file: evenly distributed dataset
 ```sh
-python Run_Datapreprocessing.py -mode Foldering_Random
+python Run_Datapreprocessing.py --mode Foldering_Random
 ```
 
 
@@ -114,7 +114,7 @@ python Run_Datapreprocessing.py -mode Foldering_Random
 * Setting condition : batch size, epoch
 * Output file : Custom trained model(weights)
 ```sh
-python object_detection.py -mode training
+python object_detection.py --mode training
 ```
 
 #### 2) mode: Prediction
@@ -122,14 +122,14 @@ python object_detection.py -mode training
 * Setting condition : confidence threshold
 * Output file : prediction result(pkl file)
 ```sh
-python object_detection.py -mode prediction
+python object_detection.py --mode prediction
 ```
 
 #### 3) mode: Postprocessing
 * Input file : Prediction result(pkl file)
 * Output file : Revised prediction result(ID and Coordinate csv files)
 ```sh
-python object_detection.py -mode postprocessing
+python object_detection.py --mode postprocessing
 ```
 
 ### 3. Activity Recognition
@@ -140,7 +140,7 @@ python object_detection.py -mode postprocessing
 * Setting condition : step size, hidden layer, batch size, epoch
 * Output file : Trained model(weights)
 ```sh
-python activity_recognition.py -mode training
+python activity_recognition.py --mode training
 ```
 
 #### 2) mode: Predicting
@@ -148,7 +148,7 @@ python activity_recognition.py -mode training
 * Setting condition : step size, hidden layer, batch size, epoch
 * Output file : Csv format file with prediction
 ```sh
-python activity_recognition.py -mode predicting
+python activity_recognition.py --mode predicting
 ```
 
 
