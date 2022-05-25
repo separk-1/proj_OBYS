@@ -160,7 +160,7 @@ python activity_recognition.py -mode predicting
 * Setting condition : time interval
 * Output file : Time Table(Activity & Equipment)
 ```sh
-python python result_analysis.py --mode time_table
+python result_analysis.py --mode time_table
 ```
 
 #### 2) mode: Cycle Time
@@ -168,7 +168,7 @@ python python result_analysis.py --mode time_table
 * Setting condition : Activity Classes
 * Output file : Activity Cycle Time
 ```sh
-python python result_analysis.py --mode cycle_time
+python result_analysis.py --mode cycle_time
 ```
 
 #### 3) mode: counting dump_truck and payloader 
