@@ -192,6 +192,7 @@ if args.mode == 'training':
     command1 += ' --project '
     command1 += save_dir
     os.system(command1)
+    os.chdir("./bin")
 
 elif args.mode == 'prediction':
     mode = 'prediction'
