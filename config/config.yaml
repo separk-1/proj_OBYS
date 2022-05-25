@@ -39,7 +39,7 @@ OBJECT_DETECTION:
     
     #set training condition
     batch : '4'
-    epochs : '10'
+    epochs : '3'
 
   prediction:
     #Set Input file & Output file directory path
@@ -67,7 +67,7 @@ ACTIVITY_RECOGNITION:
     num_equipment : 11
     n_classes : 7
     res_dir : ../weights/AR_train_result
-    epoch : 100
+    epoch : 3
     
     #sensitivy analysis
     n_hidden : 64
